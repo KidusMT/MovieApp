@@ -23,7 +23,8 @@ import android.widget.Toast;
 
 import com.example.kidusmt.movieapp.R;
 import com.example.kidusmt.movieapp.base.view.BaseActivity;
-import com.example.kidusmt.movieapp.ui.home.MainActivity;
+import com.example.kidusmt.movieapp.ui.home.HomeActivity;
+import com.example.kidusmt.movieapp.ui.tour.TourActivity;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
@@ -95,7 +96,7 @@ public class LoginActivity extends BaseActivity
                     @Override
                     public void onSuccess(LoginResult loginResult) {
                         // App code
-                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                        startActivity(new Intent(getApplicationContext(), HomeActivity.class));
                         finish();
                     }
 
@@ -109,7 +110,7 @@ public class LoginActivity extends BaseActivity
                     @Override
                     public void onError(FacebookException exception) {
                         // App code
-                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                        startActivity(new Intent(getApplicationContext(), HomeActivity.class));
                         finish();
                     }
                 });
@@ -173,8 +174,8 @@ public class LoginActivity extends BaseActivity
 
     private void updateUI(FirebaseUser currentUser) {
         //if our user has logged in then we redirect him to the home activity
-        if(!currentUser.isAnonymous()){
-            startActivity(new Intent(getApplicationContext(),MainActivity.class));
+        if(currentUser!=null){
+            startActivity(new Intent(getApplicationContext(),TourActivity.class));
         }else{
             Toast.makeText(this, "incorrect username and password combination", Toast.LENGTH_SHORT).show();
         }
@@ -374,7 +375,7 @@ public class LoginActivity extends BaseActivity
             }
 
             //This is a blind pass statement with out validating the user
-            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+            startActivity(new Intent(getApplicationContext(), TourActivity.class));
             finish();
             // TODO: register the new account here.
             return true;

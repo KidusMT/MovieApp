@@ -6,14 +6,13 @@ import java.util.HashMap;
  * Created by KidusMT on 12/22/2017.
  */
 
+//has to be changed to a retrofit POJO class when they are connected with network
 public class User {
 
     private String fullName;
     private String photo;
     private String email;
     private HashMap<String,Object> timestampJoined;
-
-    public User(){}
 
     public User(String mFullName, String mPhoneNo, String mEmail, HashMap<String, Object> timestampJoined) {
         this.fullName = mFullName;

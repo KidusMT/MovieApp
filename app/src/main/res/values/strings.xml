@@ -1,9 +1,9 @@
 <resources>
     <string name="app_name">MovieApp</string>
-    <string name="facebook_app_id">164998424230406</string>
-    <string name="fb_login_protocol_scheme">fb164998424230406</string>
-    <string name="title_activity_login">Sign in</string>
+    <string name="contentDescription">meh</string>
 
+    <!--LOGIN-->
+    <string name="title_activity_login">Sign in</string>
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password (optional)</string>
@@ -16,4 +16,34 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+
+    <!--FACEBOOK LOGIN-->
+    <string name="facebook_app_id">164998424230406</string>
+    <string name="fb_login_protocol_scheme">fb164998424230406</string>
+
+
+    <!--DETAIL ACTIVITY-->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="review_title">Review</string>
+
+    <!--SPLASH ACTIVITY-->
+    <string name="splash_loading_label">Loading&#8230;</string>
+
+    <!--TOUR ACTIVITY-->
+    <string name="tour_info_label_0">Welcome to MovieApp!\nSlide right to continue</string>
+    <string name="tour_info_label_1">View the top rated and popular Movies!</string>
+    <string name="tour_info_label_2">Share the movies you like with your friends!\nTap to begin.</string>
+
+    <!--HOME ACTIVITY-->
+    <string name="home_tab_0_label">POPULAR</string>
+    <string name="home_tab_1_label">TOP RATED</string>
+    <string name="home_tab_2_label">UPCOMING</string>
+    <string name="home_tab_3_label">IN THEATER</string>
+    <string name="real_name">Real Name</string>
+    <string name="cast_real_name">Real Name</string>
+    <string name="cast_character_name">Character Name</string>
+    <string name="movie_genre">Genre</string>
+    <string name="movie_rating">Rating</string>
+    <string name="movie_title">Movie Title</string>
+
 </resources>
