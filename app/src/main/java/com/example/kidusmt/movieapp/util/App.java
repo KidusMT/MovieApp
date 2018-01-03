@@ -4,10 +4,23 @@ import android.app.Application;
 import android.graphics.Rect;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.Toast;
 
+import com.example.kidusmt.movieapp.data.Genre;
+import com.example.kidusmt.movieapp.data.GenreResponse;
+import com.example.kidusmt.movieapp.data.Movie;
+import com.example.kidusmt.movieapp.data.MoviesResponse;
+import com.example.kidusmt.movieapp.data.rest.ApiClient;
+import com.example.kidusmt.movieapp.ui.home.MovieAdapter;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 //import com.facebook.FacebookSdk;
 //import com.facebook.appevents.AppEventsLogger;
@@ -23,29 +36,30 @@ public class App extends Application {
 
     public static HashMap<Integer,String> genreIds = new HashMap();
 
+    Call<GenreResponse> callGenreRated;
+
     @Override
     public void onCreate() {
         super.onCreate();
-        //Initializing HashMap for GenreIds
-        genreIds.put(10759,"Action & Adventure");
-        genreIds.put(16, "Animation");
-        genreIds.put(35,"Comedy");
-        genreIds.put(80, "Crime");
-        genreIds.put(99, "Documentary");
-        genreIds.put(18, "Drama");
-        genreIds.put(10751, "Family");
-        genreIds.put(10762, "Kids");
-        genreIds.put(9648, "Mystery");
-        genreIds.put(10763, "News");
-        genreIds.put(10764, "Reality");
-        genreIds.put(10765, "Sci-Fi & Fantasy");
-        genreIds.put(10766, "Soap");
-        genreIds.put(10767, "Talk");
-        genreIds.put(10768, "War & Politics");
-        genreIds.put(37, "Western");
 
-//        FacebookSdk.sdkInitialize(getApplicationContext());
-//        AppEventsLogger.activateApp(this);
+        callGenreRated = ApiClient.getApiService().getGenreList(App.API_KEY);
+
+        callGenreRated.enqueue(new Callback<GenreResponse>() {
+            @Override
+            public void onResponse(Call<GenreResponse> call, Response<GenreResponse> response) {
+                List<Genre> genreList = response.body().getGenres();
+
+                for(Genre genre: genreList){
+                    genreIds.put(genre.getId(),genre.getName());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<GenreResponse> call, Throwable t) {
+               //TODO find a way to tell users that it does not have a genre name yet
+            }
+        });
+
     }
 
     /**
@@ -54,7 +68,7 @@ public class App extends Application {
     public static String getGenre(List<Integer> genres){
         String genre_string = "";
         for(int x: genres){
-            genre_string += genreIds.get(x);
+            genre_string += genreIds.get(x)+", ";
         }
 
         return genre_string;

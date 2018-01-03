@@ -51,7 +51,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MyViewHolder
                 .load(movie.getPosterPath())
                 .placeholder(R.color.colorAccent)
                 .into(holder.moviePoster);
-        Log.e("----->",movie.getPosterPath());
+//        Log.e("----->",movie.getPosterPath());
         holder.moviePoster.setOnClickListener(
                 v -> mContext.startActivity(new Intent(mContext,MovieDetailActivity.class)
                         .putExtra("movie_id",movie.getId())
@@ -76,7 +76,6 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MyViewHolder
             movieTitle = itemView.findViewById(R.id.tv_movie_card_title);
             movieRating = itemView.findViewById(R.id.tv_movie_card_rating);
             movieGenre = itemView.findViewById(R.id.tv_movie_card_genre);
-
         }
     }
 }

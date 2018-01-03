@@ -29,7 +29,6 @@ public class FragmentPopular extends BaseFragment {
     private MovieAdapter adapter;
     Call<MoviesResponse> callTopRated;
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

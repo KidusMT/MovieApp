@@ -1,6 +1,7 @@
 package com.example.kidusmt.movieapp.data.rest;
 
 import com.example.kidusmt.movieapp.data.CastResponse;
+import com.example.kidusmt.movieapp.data.GenreResponse;
 import com.example.kidusmt.movieapp.data.MoviesResponse;
 
 import retrofit2.Call;
@@ -33,5 +34,7 @@ public interface ApiService {
     @GET("movie/{id}/credits")//movie/{movie_id}/credits
     Call<CastResponse> getCastList(@Path("id") int id, @Query("api_key") String apiKey);
 
+    @GET("genre/movie/list")
+    Call<GenreResponse> getGenreList(@Query("api_key") String apiKey);
 }
 
