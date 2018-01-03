@@ -44,7 +44,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MyViewHolder
         Movie movie = movieList.get(position);
 
         holder.movieTitle.setText(movie.getTitle());
-        holder.movieRating.setText(movie.getPopularity().toString());
+        holder.movieRating.setText(movie.getVoteAverage().toString());
         holder.movieGenre.setText(App.getGenre(movie.getGenreIds()));
         //THIS CAN GET TURNED ON WHEN WE HAVE THERE IS AN API TO CONSUME
         Picasso.with(mContext)

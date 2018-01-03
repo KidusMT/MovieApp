@@ -28,15 +28,15 @@ public class Movie {
     private String title;
     @SerializedName("backdrop_path")
     private String backdropPath;
-    @SerializedName("popularity")
-    private Double popularity;
+    @SerializedName("vote_average")
+    private Double voteAverage;
     @SerializedName("vote_count")
     private Integer voteCount;
 
     //constructor for the movie model class
     public Movie(String posterPath, String overview, String releaseDate, List<Integer> genreIds,
-                 Integer id, String originalTitle, String originalLanguage, String title,
-                 String backdropPath, Double popularity, Integer voteCount){
+                 Integer id, String originalTitle, String title,
+                 String backdropPath, Double voteAverage, Integer voteCount){
         this.posterPath = posterPath;
         this.overview = overview;
         this.releaseDate = releaseDate;
@@ -45,7 +45,7 @@ public class Movie {
         this.originalTitle = originalTitle;
         this.title = title;
         this.backdropPath = backdropPath;
-        this.popularity = popularity;
+        this.voteAverage = voteAverage;
         this.voteCount = voteCount;
     }
 
@@ -113,12 +113,12 @@ public class Movie {
         this.backdropPath = backdropPath;
     }
 
-    public Double getPopularity() {
-        return popularity;
+    public Double getVoteAverage() {
+        return voteAverage;
     }
 
-    public void setPopularity(Double popularity) {
-        this.popularity = popularity;
+    public void setVoteAverage(Double voteAverage) {
+        this.voteAverage = voteAverage;
     }
 
     public Integer getVoteCount() {
