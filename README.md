@@ -4,16 +4,16 @@ MovieApp is an android app that consumes TheMovieDB API which is from https://ap
 ![Alt text](https://pbs.twimg.com/profile_images/789117657714831361/zGfknUu8.jpg "The Movie DataBase")
 
 
-#Contents
+# Contents
 
-##SplashActivity
+## SplashActivity
 Displays the movie db icon image with fade in animation
 
-##LoginActivity
+## LoginActivity
 Sample login implementation with email and also using Facebook's authentication
 
-##DetailActivity
+## DetailActivity
 Shows the Casts (Credits) of the movie
 
-##HomeActivity
+## HomeActivity
 The Home screen there are 4 tabs showing : Popular, Top, Upcoming and In Theater Movies.
