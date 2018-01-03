@@ -1,9 +1,7 @@
 package com.example.kidusmt.movieapp.base.view;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.example.kidusmt.movieapp.util.Utils;
@@ -15,7 +13,7 @@ import com.example.kidusmt.movieapp.util.Utils;
 public class BaseActivity extends AppCompatActivity {
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         d("< ------------------------------ onCreate(Bundle) ------------------------------ >");
     }
@@ -50,34 +48,21 @@ public class BaseActivity extends AppCompatActivity {
         d("< ------------------------------ onDestroy() ------------------------------ >");
     }
 
-    /**
-     * Show a debug message to the logcat
-     *
-     * @param message message to display
-     */
+
     protected void d(String message) {
         Utils.d(this, message);
     }
 
-    /**
-     * Show an error message to the logcat
-     *
-     * @param message message to display
-     */
     protected void e(String message) {
         Utils.e(this, message);
     }
 
-    /**
-     * Show a toast message, with a default duration length of LENGTH_SHORT.
-     */
+
     protected void toast(String message) {
         toast(message, Toast.LENGTH_SHORT);
     }
 
-    /**
-     * Show a toast message, with a custom duration provided via int parameter
-     */
+
     protected void toast(String message, int duration) {
         Toast.makeText(this, message, duration).show();
     }

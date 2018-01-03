@@ -15,7 +15,6 @@ import com.example.kidusmt.movieapp.base.view.BaseFragment;
 import com.example.kidusmt.movieapp.data.Movie;
 import com.example.kidusmt.movieapp.data.MoviesResponse;
 import com.example.kidusmt.movieapp.data.rest.ApiClient;
-import com.example.kidusmt.movieapp.data.rest.ApiService;
 import com.example.kidusmt.movieapp.util.App;
 
 import java.util.List;
@@ -28,8 +27,8 @@ public class FragmentPopular extends BaseFragment {
 
     private RecyclerView recyclerView;
     private MovieAdapter adapter;
-    ApiService apiService;
-    Call<MoviesResponse> callPopular;
+    Call<MoviesResponse> callTopRated;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -41,9 +40,9 @@ public class FragmentPopular extends BaseFragment {
             return;
         }
 
-        callPopular = ApiClient.getApiService().getPopularMovies(App.API_KEY);
+        callTopRated = ApiClient.getApiService().getPopularMovies(App.API_KEY);
 
-        callPopular.enqueue(new Callback<MoviesResponse>() {
+        callTopRated.enqueue(new Callback<MoviesResponse>() {
             @Override
             public void onResponse(Call<MoviesResponse> call, Response<MoviesResponse> response) {
                 List<Movie> movieList = response.body().getResults();
@@ -56,19 +55,18 @@ public class FragmentPopular extends BaseFragment {
                 e(t.getMessage());
             }
         });
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View v = inflater.inflate(R.layout.fragment_fragment_popular, container, false);
+        View v = inflater.inflate(R.layout.fragment_fragment_top_rated,container,false);
 
-        recyclerView = v.findViewById(R.id.recycler_view_popular);
-        RecyclerView.LayoutManager mLayoutManager =
-                new GridLayoutManager(getActivity(), 2);
+        recyclerView = v.findViewById(R.id.recycler_view_top_rated);
+        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getActivity(), 2);
         recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.addItemDecoration(
                 new App.GridSpacingItemDecoration(2, dpToPx(10), true));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -79,7 +77,7 @@ public class FragmentPopular extends BaseFragment {
     /**
      * Converting dp to pixel
      */
-    public int dpToPx(int dp) {
+    private int dpToPx(int dp) {
         Resources r = getResources();
         return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, r.getDisplayMetrics()));
     }

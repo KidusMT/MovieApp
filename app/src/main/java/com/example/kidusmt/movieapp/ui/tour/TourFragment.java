@@ -53,7 +53,7 @@ public class TourFragment extends BaseFragment {
         int image;
         switch (position) {
             case 0:
-                image = R.drawable.ic_movie_app;
+                image = R.drawable.splash_movie_2;
                 break;
             case 1:
                 image = R.drawable.splash_movies;

@@ -13,6 +13,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -35,13 +36,6 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.facebook.android:facebook-android-sdk:[4,5)'
     //    implementation 'com.facebook.android:facebook-android-sdk:4.1.0'
-    //FIREBASE
-    implementation 'com.google.firebase:firebase-auth:10.2.1'
-    implementation 'com.google.firebase:firebase-core:10.2.1'
-    implementation 'com.google.firebase:firebase-database:10.2.1'
-    implementation 'com.firebase:firebase-client-android:2.5.+'
-//    implementation 'com.google.firebase:firebase-crash:10.2.1'
-    implementation 'com.google.android.gms:play-services-auth:10.2.1'
     //Kotlin support
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
@@ -50,7 +44,7 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
     implementation 'com.squareup.picasso:picasso:2.5.2'
-    //noinspection GradleCompatible
+    //noinspection GradleCompatible//this does something I don't really know this time
     implementation 'com.android.support:cardview-v7:26.1.0'
     implementation 'com.android.support:recyclerview-v7:26.1.0'
     implementation 'com.android.support:appcompat-v7:26.1.0'
@@ -60,4 +54,3 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
 }
-apply plugin: 'com.google.gms.google-services'

@@ -1,5 +1,6 @@
 package com.example.kidusmt.movieapp.ui.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -9,7 +10,7 @@ import android.support.v4.view.ViewPager;
 
 import com.example.kidusmt.movieapp.R;
 import com.example.kidusmt.movieapp.base.view.BaseActivity;
-import com.google.firebase.auth.FirebaseAuth;
+import com.example.kidusmt.movieapp.ui.login.LoginActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +29,10 @@ public class HomeActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+
         viewPager = findViewById(R.id.viewpager);
         setupViewPager(viewPager);
 
@@ -41,14 +46,14 @@ public class HomeActivity extends BaseActivity {
         adapter.addFragment(new FragmentPopular(), "Popular");
         adapter.addFragment(new FragmentTopRated(), "Top");
         adapter.addFragment(new FragmentUpcoming(), "Upcoming");
-        adapter.addFragment(new FragmentNowPlaying(), "InTheater");
+        adapter.addFragment(new FragmentInTheater(), "InTheater");
 
         viewPager.setAdapter(adapter);
     }
 
     //for logout from navigationDrawer
     public void logout(){
-        FirebaseAuth.getInstance().signOut();
+        startActivity(new Intent(this, LoginActivity.class));
     }
 
     //CONTROLS THE SELECTION AND SWIPE FOR THE TABS

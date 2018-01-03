@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".ui.tour.TourActivity">
+    tools:context="com.example.kidusmt.movieapp.ui.tour.TourActivity">
 
     <android.support.v4.view.ViewPager
         android:id="@+id/tourViewPager"

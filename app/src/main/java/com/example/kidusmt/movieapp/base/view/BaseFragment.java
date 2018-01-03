@@ -48,20 +48,12 @@ public class BaseFragment extends Fragment {
         d("< -------------------- onDestroy() -------------------- >");
     }
 
-    /**
-     * Show a debug message to the logcat
-     *
-     * @param message message to display
-     */
+
     protected void d(String message) {
         Utils.d(this, message);
     }
 
-    /**
-     * Show an error message to the logcat
-     *
-     * @param message message to display
-     */
+
     protected void e(String message) {
         Utils.e(this, message);
     }

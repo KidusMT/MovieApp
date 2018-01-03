@@ -15,7 +15,6 @@ import com.example.kidusmt.movieapp.base.view.BaseFragment;
 import com.example.kidusmt.movieapp.data.Movie;
 import com.example.kidusmt.movieapp.data.MoviesResponse;
 import com.example.kidusmt.movieapp.data.rest.ApiClient;
-import com.example.kidusmt.movieapp.data.rest.ApiService;
 import com.example.kidusmt.movieapp.util.App;
 
 import java.util.List;
@@ -24,11 +23,12 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class FragmentNowPlaying extends BaseFragment {
+public class FragmentInTheater extends BaseFragment {
 
     private RecyclerView recyclerView;
     private MovieAdapter adapter;
-    Call<MoviesResponse> callInTheater;
+    Call<MoviesResponse> callTopRated;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -40,9 +40,9 @@ public class FragmentNowPlaying extends BaseFragment {
             return;
         }
 
-        callInTheater = ApiClient.getApiService().getNowPlayingMovies(App.API_KEY);
+        callTopRated = ApiClient.getApiService().getNowPlayingMovies(App.API_KEY);
 
-        callInTheater.enqueue(new Callback<MoviesResponse>() {
+        callTopRated.enqueue(new Callback<MoviesResponse>() {
             @Override
             public void onResponse(Call<MoviesResponse> call, Response<MoviesResponse> response) {
                 List<Movie> movieList = response.body().getResults();
@@ -55,60 +55,24 @@ public class FragmentNowPlaying extends BaseFragment {
                 e(t.getMessage());
             }
         });
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_fragment_now_playing,container, false);
 
-        recyclerView = v.findViewById(R.id.recycler_view_now_playing);
-        RecyclerView.LayoutManager mLayoutManager =
-                new GridLayoutManager(getActivity(), 2);
+        View v = inflater.inflate(R.layout.fragment_fragment_top_rated,container,false);
+
+        recyclerView = v.findViewById(R.id.recycler_view_top_rated);
+        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getActivity(), 2);
         recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.addItemDecoration(
                 new App.GridSpacingItemDecoration(2, dpToPx(10), true));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(adapter);
-
         return v;
     }
-//
-//    /**
-//     * Adding few Movie for testing
-//     */
-//    private void prepareMovie(RecyclerView.Adapter adapter) {
-//        int[] covers = new int[]{
-//                R.drawable.poster_i_am_wrath,
-//                R.drawable.poster_civil_war,
-//                R.drawable.poster_hunts_man,
-//                R.drawable.poster_jungle_book,
-//                R.drawable.poster_neighbour,
-//                R.drawable.poster_pandemic
-//        };
-//
-//        Movie a = new Movie("I Am Wrath", "Action",covers[0]);
-//        movieList.add(a);
-//
-//        a = new Movie("Civil War","Action, Adventure",covers[1]);
-//        movieList.add(a);
-//
-//        a = new Movie("HuntsMan","Adventure, Action",covers[2]);
-//        movieList.add(a);
-//
-//        a = new Movie("Jungle Book", "Adventure",covers[3]);
-//        movieList.add(a);
-//
-//        a = new Movie("Neighbor", "Comedy",covers[4]);
-//        movieList.add(a);
-//
-//        a = new Movie("Pandemic","Drama",covers[5]);
-//        movieList.add(a);
-//
-//        adapter.notifyDataSetChanged();
-//    }
-
 
     /**
      * Converting dp to pixel

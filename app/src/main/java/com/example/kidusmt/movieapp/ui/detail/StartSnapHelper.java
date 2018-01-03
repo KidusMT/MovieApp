@@ -12,6 +12,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 /**
+ * NOT WRITTEN BY KIUDSMT -> THAT'S ME
  * Created by amitshekhar on 15/01/17.
  */
 

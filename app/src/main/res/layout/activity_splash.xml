@@ -4,16 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:onClick="openTour"
+    android:onClick="skipSplashScreen"
     android:background="@color/colorPrimary"
-    tools:context=".ui.splash.SplashActivity">
+    tools:context="com.example.kidusmt.movieapp.ui.splash.SplashActivity">
 
     <ImageView
-        android:layout_width="180dp"
-        android:layout_height="180dp"
+        android:id="@+id/iv_splash_img"
+        android:layout_width="180sp"
+        android:layout_height="180sp"
         android:layout_centerInParent="true"
         android:contentDescription="@string/contentDescription"
-        app:srcCompat="@drawable/ic_movie_app" />
+        android:src="@drawable/movie_logo" />
 
     <TextView
         android:id="@+id/splashLoadingLabel"
