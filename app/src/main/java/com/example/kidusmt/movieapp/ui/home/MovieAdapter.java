@@ -1,63 +1,47 @@
 package com.example.kidusmt.movieapp.ui.home;
 
-import android.content.Context;
-import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
-import com.example.kidusmt.movieapp.data.Movie;
+import com.example.kidusmt.movieapp.data.movie.Movie;
 import com.example.kidusmt.movieapp.R;
-import com.example.kidusmt.movieapp.ui.detail.MovieDetailActivity;
-import com.example.kidusmt.movieapp.util.App;
-import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by KidusMT on 12/24/2017.
  */
 
-public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MyViewHolder> {
+public class MovieAdapter extends RecyclerView.Adapter<MovieViewHolder> {
 
-    private Context mContext;
     private List<Movie> movieList;
+    private HomeContract.Presenter presenter;
 
-    public MovieAdapter(Context mContext, List<Movie> movieList) {
-        this.mContext = mContext;
-        this.movieList = movieList;
+    public MovieAdapter(HomeContract.Presenter presenter) {
+       this.presenter = presenter;
+        movieList = new ArrayList<>();
     }
 
     @Override
-    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public MovieViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.movie_card, parent, false);
-        return new MyViewHolder(itemView);
+        return new MovieViewHolder(itemView, presenter);
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, int position) {
-        Movie movie = movieList.get(position);
+    public void onBindViewHolder(MovieViewHolder holder, int position) {
+        holder.update(movieList);
+    }
 
-        holder.movieTitle.setText(movie.getTitle());
-        holder.movieRating.setText(movie.getVoteAverage().toString());
-        holder.movieGenre.setText(App.getGenre(movie.getGenreIds()));
-        //THIS CAN GET TURNED ON WHEN WE HAVE THERE IS AN API TO CONSUME
-        Picasso.with(mContext)
-                .load(movie.getPosterPath())
-                .placeholder(R.color.colorAccent)
-                .into(holder.moviePoster);
-//        Log.e("----->",movie.getPosterPath());
-        holder.moviePoster.setOnClickListener(
-                v -> mContext.startActivity(new Intent(mContext,MovieDetailActivity.class)
-                        .putExtra("movie_id",movie.getId())
-                        .putExtra("movie_review",movie.getOverview())
-                        .putExtra("movie_backdrop",movie.getBackdropPath())));
-
+    //for updating and putting the recyclerView on the fragments
+    public void update(List<Movie> data) {
+        movieList.clear();
+        movieList.addAll(data);
+        notifyDataSetChanged();
     }
 
     @Override
@@ -65,17 +49,4 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MyViewHolder
         return (movieList!=null)?movieList.size():0;
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder{
-
-        public TextView movieTitle,movieGenre,movieRating;
-        public ImageView moviePoster;
-
-        public MyViewHolder(View itemView) {
-            super(itemView);
-            moviePoster = itemView.findViewById(R.id.iv_movie_card_poster);
-            movieTitle = itemView.findViewById(R.id.tv_movie_card_title);
-            movieRating = itemView.findViewById(R.id.tv_movie_card_rating);
-            movieGenre = itemView.findViewById(R.id.tv_movie_card_genre);
-        }
-    }
 }

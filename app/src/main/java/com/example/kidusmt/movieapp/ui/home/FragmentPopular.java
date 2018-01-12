@@ -12,9 +12,16 @@ import android.view.ViewGroup;
 
 import com.example.kidusmt.movieapp.R;
 import com.example.kidusmt.movieapp.base.view.BaseFragment;
-import com.example.kidusmt.movieapp.data.Movie;
-import com.example.kidusmt.movieapp.data.MoviesResponse;
-import com.example.kidusmt.movieapp.data.rest.ApiClient;
+import com.example.kidusmt.movieapp.data.movie.Movie;
+import com.example.kidusmt.movieapp.data.movie.MovieInTheater;
+import com.example.kidusmt.movieapp.data.movie.MoviePopular;
+import com.example.kidusmt.movieapp.data.movie.MovieTopRated;
+import com.example.kidusmt.movieapp.data.movie.MovieUpComing;
+import com.example.kidusmt.movieapp.data.movie.MoviesResponse;
+import com.example.kidusmt.movieapp.data.movie.RepoMovie;
+import com.example.kidusmt.movieapp.data.movie.local.MovieLocal;
+import com.example.kidusmt.movieapp.data.movie.remote.MovieRemote;
+import com.example.kidusmt.movieapp.ui.detail.MovieDetailActivity;
 import com.example.kidusmt.movieapp.util.App;
 
 import java.util.List;
@@ -23,11 +30,12 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class FragmentPopular extends BaseFragment {
+public class FragmentPopular extends BaseFragment implements HomeContract.View {
 
     private RecyclerView recyclerView;
     private MovieAdapter adapter;
     Call<MoviesResponse> callTopRated;
+    private HomeContract.Presenter presenter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -35,17 +43,22 @@ public class FragmentPopular extends BaseFragment {
 
         //for just making sure our api key is available
         if (App.API_KEY.isEmpty()) {
-            e("Please obtain your API KEY first from themoviedb.org");
+            e("Please obtain your API KEY first from TheMovieDB.org");
             return;
         }
 
-        callTopRated = ApiClient.getApiService().getPopularMovies(App.API_KEY);
+        presenter = new HomePresenter(new RepoMovie(
+                new MovieLocal(App.boxStore),
+                new MovieRemote()));
+
+        callTopRated = MovieRemote.movieService.getPopularMovies(App.API_KEY);
 
         callTopRated.enqueue(new Callback<MoviesResponse>() {
             @Override
             public void onResponse(Call<MoviesResponse> call, Response<MoviesResponse> response) {
+                //TODO have to find what to do with movieList
                 List<Movie> movieList = response.body().getResults();
-                adapter = new MovieAdapter(getActivity(),movieList);//movieList is needed
+                adapter = new MovieAdapter(presenter);
                 recyclerView.setAdapter(adapter);
             }
 
@@ -81,4 +94,42 @@ public class FragmentPopular extends BaseFragment {
         return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, r.getDisplayMetrics()));
     }
 
+    @Override
+    public void showPopularMovies(List<MoviePopular> moviePopulars) {
+        adapter.(moviePopulars);
+    }
+
+    @Override
+    public void showUpComingMovies(List<MovieUpComing> movieUpComings) {
+
+    }
+
+    @Override
+    public void showInTheaterMovies(List<MovieInTheater> movieInTheaters) {
+
+    }
+
+    @Override
+    public void showTopRatedMovies(List<MovieTopRated> movieTopRated) {
+
+    }
+
+    @Override
+    public void openMovieDetail(int position) { presenter.onMovieClicked(position);}
+
+    @Override
+    public void refresh() {
+        //This will notify for any change in the recyclerView for updating the UI
+        adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void attachPresenter(HomeContract.Presenter presenter) {
+        //TODO: will find out about it
+    }
+
+    @Override
+    public void close() {
+        //TODO: do something like --> finish()
+    }
 }

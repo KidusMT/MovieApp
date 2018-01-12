@@ -4,20 +4,17 @@ import android.app.Application;
 import android.graphics.Rect;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.Toast;
 
-import com.example.kidusmt.movieapp.data.Genre;
-import com.example.kidusmt.movieapp.data.GenreResponse;
-import com.example.kidusmt.movieapp.data.Movie;
-import com.example.kidusmt.movieapp.data.MoviesResponse;
-import com.example.kidusmt.movieapp.data.rest.ApiClient;
-import com.example.kidusmt.movieapp.ui.home.MovieAdapter;
+import com.example.kidusmt.movieapp.data.movie.Genre;
+import com.example.kidusmt.movieapp.data.movie.GenreResponse;
+import com.example.kidusmt.movieapp.data.movie.MyObjectBox;
+import com.example.kidusmt.movieapp.data.movie.remote.MovieRemote;
+import com.example.kidusmt.movieapp.data.movie.remote.MovieService;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
+import io.objectbox.BoxStore;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -38,11 +35,17 @@ public class App extends Application {
 
     Call<GenreResponse> callGenreRated;
 
+    public static BoxStore boxStore;
+
     @Override
     public void onCreate() {
         super.onCreate();
 
-        callGenreRated = ApiClient.getApiService().getGenreList(App.API_KEY);
+        //Initializes ObjectBox for the first time when application runs
+        if (boxStore == null) boxStore = MyObjectBox.builder().androidContext(this).build();
+
+        //This retrofit callBack is for fetching genreLists
+        callGenreRated = MovieRemote.movieService.getGenreList(App.API_KEY);
 
         callGenreRated.enqueue(new Callback<GenreResponse>() {
             @Override

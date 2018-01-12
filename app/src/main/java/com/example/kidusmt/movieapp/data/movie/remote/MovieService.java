@@ -1,8 +1,8 @@
-package com.example.kidusmt.movieapp.data.rest;
+package com.example.kidusmt.movieapp.data.movie.remote;
 
-import com.example.kidusmt.movieapp.data.CastResponse;
-import com.example.kidusmt.movieapp.data.GenreResponse;
-import com.example.kidusmt.movieapp.data.MoviesResponse;
+import com.example.kidusmt.movieapp.data.movie.CastResponse;
+import com.example.kidusmt.movieapp.data.movie.GenreResponse;
+import com.example.kidusmt.movieapp.data.movie.MoviesResponse;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -13,7 +13,7 @@ import retrofit2.http.Query;
  * Created by KidusMT on 12/28/2017.
  */
 
-public interface ApiService {
+public interface MovieService {
 
     @GET("movie/popular")
     Call<MoviesResponse> getPopularMovies(@Query("api_key") String apiKey);

@@ -1,4 +1,4 @@
-package com.example.kidusmt.movieapp.data;
+package com.example.kidusmt.movieapp.data.movie;
 
 import com.example.kidusmt.movieapp.util.App;
 import com.google.gson.annotations.SerializedName;
@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by KidusMT on 12/24/2017.
+ * This is a POJO class which is used by retrofit for automatically parsing json object
  */
 
 public class Movie {

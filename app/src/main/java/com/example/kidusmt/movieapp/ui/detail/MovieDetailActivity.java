@@ -1,5 +1,6 @@
 package com.example.kidusmt.movieapp.ui.detail;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -13,11 +14,10 @@ import android.widget.TextView;
 
 import com.example.kidusmt.movieapp.R;
 import com.example.kidusmt.movieapp.base.view.BaseActivity;
-import com.example.kidusmt.movieapp.data.Cast;
-import com.example.kidusmt.movieapp.data.CastResponse;
-import com.example.kidusmt.movieapp.data.MoviesResponse;
-import com.example.kidusmt.movieapp.data.rest.ApiClient;
-import com.example.kidusmt.movieapp.data.rest.ApiService;
+import com.example.kidusmt.movieapp.data.movie.Cast;
+import com.example.kidusmt.movieapp.data.movie.CastResponse;
+import com.example.kidusmt.movieapp.data.movie.remote.MovieRemote;
+import com.example.kidusmt.movieapp.ui.home.HomeActivity;
 import com.example.kidusmt.movieapp.util.App;
 import com.example.kidusmt.movieapp.util.RecyclerItemClickListener;
 import com.squareup.picasso.Picasso;
@@ -28,7 +28,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MovieDetailActivity extends BaseActivity {
+public class MovieDetailActivity extends BaseActivity implements MovieDetailContract.View {
 
     RecyclerView recyclerView;
     CastAdapter castAdapter;
@@ -36,6 +36,8 @@ public class MovieDetailActivity extends BaseActivity {
     List<Cast> castList;
     TextView reviewDetail;
     ImageView backdrop_img;
+
+    MovieDetailContract.Presenter presenter;
 
     public MovieDetailActivity(){}
 
@@ -73,20 +75,18 @@ public class MovieDetailActivity extends BaseActivity {
 
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
-        callDetail = ApiClient.getApiService().getCastList(movieId, App.API_KEY);
+        callDetail = MovieRemote.getApiService().getCastList(movieId, App.API_KEY);
 
         callDetail.enqueue(new Callback<CastResponse>() {
             @Override
             public void onResponse(Call<CastResponse> call, Response<CastResponse> response) {
-
                 castList = response.body().getCast();
-                castAdapter = new CastAdapter(getApplicationContext(),castList);//movieList is needed
-                recyclerView.setAdapter(castAdapter);
+
             }
 
             @Override
             public void onFailure(Call<CastResponse> call, Throwable t) {
-
+                //TODO: display error message here, find a way for better display
             }
         });
 
@@ -100,8 +100,8 @@ public class MovieDetailActivity extends BaseActivity {
 
                     @Override
                     public void onLongItemClick(View view, int position) {
-                        //TODO: handles longItemClick
-                        toast("working long");
+                        //TODO: display the credit's name
+                        toast("credit's name");//actors name for the clicked image of the actor
                     }
                 }));
 
@@ -136,5 +136,27 @@ public class MovieDetailActivity extends BaseActivity {
                 }
             }
         });
+    }
+
+    @Override
+    public void showDetail(List<Cast> castList) {
+        castAdapter = new CastAdapter(this, castList);
+        recyclerView.setAdapter(castAdapter);
+    }
+
+    @Override
+    public void openImage(String imageURI) {
+        //TODO I have to implements the opening of an image when clicked
+    }
+
+    @Override
+    public void closeActivity() {
+        finish();
+    }
+
+    @Override
+    public void openHomeActivity() {
+        //TODO think about how to go back to the specific tab you where working to rather than opening HomeActivity by default
+        startActivity(new Intent(this, HomeActivity.class));
     }
 }

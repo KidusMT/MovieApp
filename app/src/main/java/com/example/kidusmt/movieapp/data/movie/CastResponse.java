@@ -1,4 +1,4 @@
-package com.example.kidusmt.movieapp.data;
+package com.example.kidusmt.movieapp.data.movie;
 
 import com.google.gson.annotations.SerializedName;
 

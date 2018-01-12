@@ -32,7 +32,6 @@ public class HomeActivity extends BaseActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-
         viewPager = findViewById(R.id.viewpager);
         setupViewPager(viewPager);
 

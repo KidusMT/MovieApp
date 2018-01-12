@@ -38,9 +38,8 @@ public class SplashActivity extends BaseActivity {
             return;
         }
 
+        //Its possible to change the animation type anytime
         Animation alphaAnim = AnimationUtils.loadAnimation(this,R.anim.alpha);
-//        Animation fadeInAnim = AnimationUtils.loadAnimation(this,R.anim.splash_fade_in);
-//        Animation translate = AnimationUtils.loadAnimation(this,R.anim.translate);
 
         splashLogo.startAnimation(alphaAnim);
 

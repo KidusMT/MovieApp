@@ -29,14 +29,14 @@ public class LoginActivity extends BaseActivity {
 
         btn_login = findViewById(R.id.email_sign_in_button);
         fb_login = findViewById(R.id.login_button);
-        btn_fb_login = findViewById(R.id.email_sign_up_button);
+//        btn_fb_sign_up = findViewById(R.id.email_sign_up_button);
 
         //EMAIL LOGIN AUTHENTICATION
         btn_login.setOnClickListener(a->openHomeActivity());
         //FACEBOOK LOGIN AUTHENTICATION
         fb_login.setOnClickListener(b->openHomeActivity());
         //FOR THE FACEBOOK LOGIN BUTTON ACTION
-        btn_fb_login.setOnClickListener(c->openHomeActivity());
+//        btn_fb_sign_up.setOnClickListener(c->openHomeActivity());
 
     }
 

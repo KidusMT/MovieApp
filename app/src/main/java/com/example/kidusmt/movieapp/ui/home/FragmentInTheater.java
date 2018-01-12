@@ -12,9 +12,9 @@ import android.view.ViewGroup;
 
 import com.example.kidusmt.movieapp.R;
 import com.example.kidusmt.movieapp.base.view.BaseFragment;
-import com.example.kidusmt.movieapp.data.Movie;
-import com.example.kidusmt.movieapp.data.MoviesResponse;
-import com.example.kidusmt.movieapp.data.rest.ApiClient;
+import com.example.kidusmt.movieapp.data.movie.Movie;
+import com.example.kidusmt.movieapp.data.movie.MoviesResponse;
+import com.example.kidusmt.movieapp.data.movie.remote.MovieRemote;
 import com.example.kidusmt.movieapp.util.App;
 
 import java.util.List;
@@ -28,7 +28,7 @@ public class FragmentInTheater extends BaseFragment {
     private RecyclerView recyclerView;
     private MovieAdapter adapter;
     Call<MoviesResponse> callTopRated;
-
+    HomeContract.Presenter presenter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -40,7 +40,7 @@ public class FragmentInTheater extends BaseFragment {
             return;
         }
 
-        callTopRated = ApiClient.getApiService().getNowPlayingMovies(App.API_KEY);
+        callTopRated = MovieRemote.movieService.getNowPlayingMovies(App.API_KEY);
 
         callTopRated.enqueue(new Callback<MoviesResponse>() {
             @Override
