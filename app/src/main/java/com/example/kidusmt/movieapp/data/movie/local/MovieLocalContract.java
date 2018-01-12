@@ -22,9 +22,13 @@ public interface MovieLocalContract {
 
     /**
      * Retrieve a list of movies by the given category
-     *
      * @param category The category to search for
      * @return Observable list of movies retrieved
      */
     Observable<List<Movie>> getByCategory(String category);
+
+    /**
+     * Deletes all the movies from storage
+     */
+    Observable<Boolean> deleteAll(String category);
 }
