@@ -19,6 +19,9 @@ import io.reactivex.Observable;
 
 public interface MovieRemoteContract {
 
+
+    Observable<List<MovieDto>> getMovies(String clientId, String category);
+
     /**
      * Retrieve back an observable list of posts.
      *

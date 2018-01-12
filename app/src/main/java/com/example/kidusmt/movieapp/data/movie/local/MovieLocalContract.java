@@ -1,9 +1,6 @@
 package com.example.kidusmt.movieapp.data.movie.local;
 
-import com.example.kidusmt.movieapp.data.movie.MovieInTheater;
-import com.example.kidusmt.movieapp.data.movie.MoviePopular;
-import com.example.kidusmt.movieapp.data.movie.MovieTopRated;
-import com.example.kidusmt.movieapp.data.movie.MovieUpComing;
+import com.example.kidusmt.movieapp.data.movie.Movie;
 
 import java.util.List;
 
@@ -16,49 +13,18 @@ import io.reactivex.Observable;
 public interface MovieLocalContract {
 
     /**
-     * These methods are for retrieving different movie lists from local storage
-     * @return
+     * Save all the movies on local storage
+     *
+     * @param movies movies to save
+     * @return Observable boolean, true if it was saved, false otherwise
      */
-    Observable<List<MoviePopular>> getPopularMovies();
-
-    Observable<List<MovieTopRated>> getTopRatedMovies();
-
-    Observable<List<MovieUpComing>> getUpComingMovie();
-
-    Observable<List<MovieInTheater>> getInTheater();
+    Observable<Boolean> putAll(List<Movie> movies);
 
     /**
-     * These methods are for saving different MovieCategories types
-     * @return
+     * Retrieve a list of movies by the given category
+     *
+     * @param category The category to search for
+     * @return Observable list of movies retrieved
      */
-    Observable<Boolean> savePopularMovie(List<MoviePopular> populars);
-
-    Observable<Boolean> saveTopRateMovie(List<MovieTopRated> topRateds);
-
-    Observable<Boolean> saveUpComingMovie(List<MovieUpComing> upComings);
-
-    Observable<Boolean> saveInTheaterMovie(List<MovieInTheater> inTheaters);
-
-    /**
-     * These methods are for updating the UI according to the updates found
-     * @return
-     */
-    Observable<Boolean> updatePopularMovie(MoviePopular moviePopular);
-
-    Observable<Boolean> updateInTheaterMovie(MovieInTheater movieInTheater);
-
-    Observable<Boolean> updateUpComingMovie(MovieUpComing movieUpComing);
-
-    Observable<Boolean> updateTopRatedMovie(MovieTopRated movieTopRated);
-
-    /**
-     * Retrieves the amount of movie saved on the device.
-     */
-    int popularSize();
-
-    int inTheaterSize();
-
-    int topRatedSize();
-
-    int upComingSize();
+    Observable<List<Movie>> getByCategory(String category);
 }

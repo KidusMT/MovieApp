@@ -34,24 +34,18 @@ public class FragmentPopular extends BaseFragment implements HomeContract.View {
 
     private RecyclerView recyclerView;
     private MovieAdapter adapter;
-    Call<MoviesResponse> callTopRated;
     private HomeContract.Presenter presenter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //for just making sure our api key is available
-        if (App.API_KEY.isEmpty()) {
-            e("Please obtain your API KEY first from TheMovieDB.org");
-            return;
-        }
-
         presenter = new HomePresenter(new RepoMovie(
                 new MovieLocal(App.boxStore),
-                new MovieRemote()));
+                new MovieRemote())
+        );
 
-        callTopRated = MovieRemote.movieService.getPopularMovies(App.API_KEY);
+/*        callTopRated = MovieRemote.movieService.getPopularMovies(App.API_KEY);
 
         callTopRated.enqueue(new Callback<MoviesResponse>() {
             @Override
@@ -66,7 +60,7 @@ public class FragmentPopular extends BaseFragment implements HomeContract.View {
             public void onFailure(Call<MoviesResponse> call, Throwable t) {
                 e(t.getMessage());
             }
-        });
+        });*/
     }
 
     @Override
@@ -83,6 +77,7 @@ public class FragmentPopular extends BaseFragment implements HomeContract.View {
                 new App.GridSpacingItemDecoration(2, dpToPx(10), true));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(adapter);
+
         return v;
     }
 
@@ -96,7 +91,7 @@ public class FragmentPopular extends BaseFragment implements HomeContract.View {
 
     @Override
     public void showPopularMovies(List<MoviePopular> moviePopulars) {
-        adapter.(moviePopulars);
+//        adapter.update(moviePopulars);
     }
 
     @Override

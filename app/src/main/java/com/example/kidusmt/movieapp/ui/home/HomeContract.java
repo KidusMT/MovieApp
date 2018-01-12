@@ -20,6 +20,9 @@ public interface HomeContract {
         //show movie card on the recyclerView
 //        void showMovies(List<Movie> movieList);
 
+        // TODO: Add method showing and hiding the progress
+        // TODO: Add method to return category of movies it shows
+
         void showPopularMovies(List<MoviePopular> moviePopulars);
         void showUpComingMovies(List<MovieUpComing> movieUpComings);
         void showInTheaterMovies(List<MovieInTheater> movieInTheaters);

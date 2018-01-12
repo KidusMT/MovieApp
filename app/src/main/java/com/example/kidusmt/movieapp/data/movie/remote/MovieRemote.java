@@ -1,5 +1,6 @@
 package com.example.kidusmt.movieapp.data.movie.remote;
 
+import com.example.kidusmt.movieapp.data.movie.Movie;
 import com.example.kidusmt.movieapp.data.movie.MovieUpComing;
 import com.example.kidusmt.movieapp.data.movie.MovieInTheater;
 import com.example.kidusmt.movieapp.data.movie.MoviePopular;
@@ -47,6 +48,25 @@ public class MovieRemote implements MovieRemoteContract{
                 .readTimeout(30, TimeUnit.SECONDS)
                 .writeTimeout(30, TimeUnit.SECONDS)
                 .build();
+    }
+
+    @Override
+    public Observable<List<MovieDto>> getMovies(String clientId, String category) {
+        final List<MovieDto> movies = new ArrayList<>();
+        movieService.getMovies(App.API_KEY, category)
+                .enqueue(new Callback<MoviesResponse>() {
+                    @Override
+                    public void onResponse(Call<MoviesResponse> call, Response<MoviesResponse> response) {
+                        final List<MovieDto> downloaded = response.body().getResults();
+                        movies.addAll(downloaded);
+                    }
+
+                    @Override
+                    public void onFailure(Call<MoviesResponse> call, Throwable t) {
+
+                    }
+                });
+        return Observable.just(movies);
     }
 
     /**

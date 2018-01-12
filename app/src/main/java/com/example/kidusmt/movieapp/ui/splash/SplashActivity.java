@@ -31,6 +31,8 @@ public class SplashActivity extends BaseActivity {
 
         pref = getSharedPreferences("MovieApp",MODE_PRIVATE);
 
+        
+
         ImageView splashLogo = findViewById(R.id.iv_splash_img);
         //find out if the user has seen the splash screen - always false for now
         if (isSeen()){

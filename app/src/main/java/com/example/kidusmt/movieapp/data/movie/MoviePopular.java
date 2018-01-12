@@ -12,11 +12,12 @@ import io.objectbox.annotation.Index;
  */
 @Entity
 public class MoviePopular {
+
     @Id
-    public Integer _id;
+    public long id;
 
     @Index
-    public Integer id;
+    public int _id;
 
     public String posterPath;
 
