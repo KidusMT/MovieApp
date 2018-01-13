@@ -19,6 +19,7 @@ import com.example.kidusmt.movieapp.data.movie.CastResponse;
 import com.example.kidusmt.movieapp.data.movie.remote.MovieRemote;
 import com.example.kidusmt.movieapp.ui.home.HomeActivity;
 import com.example.kidusmt.movieapp.util.App;
+import com.example.kidusmt.movieapp.util.Constants;
 import com.example.kidusmt.movieapp.util.RecyclerItemClickListener;
 import com.squareup.picasso.Picasso;
 
@@ -60,7 +61,7 @@ public class MovieDetailActivity extends BaseActivity implements MovieDetailCont
                 .into(backdrop_img);
 
         //for just making sure our api key is available
-        if (App.API_KEY.isEmpty()) {
+        if (Constants.API_KEY.isEmpty()) {
             e("Please obtain your API KEY first from themoviedb.org");
             return;
         }
@@ -75,7 +76,7 @@ public class MovieDetailActivity extends BaseActivity implements MovieDetailCont
 
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
-        callDetail = MovieRemote.getApiService().getCastList(movieId, App.API_KEY);
+        callDetail = MovieRemote.movieService.getCastList(movieId, Constants.API_KEY);
 
         callDetail.enqueue(new Callback<CastResponse>() {
             @Override

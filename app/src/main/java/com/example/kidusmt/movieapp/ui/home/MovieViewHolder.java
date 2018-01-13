@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.example.kidusmt.movieapp.R;
 import com.example.kidusmt.movieapp.data.movie.Movie;
 import com.example.kidusmt.movieapp.ui.detail.MovieDetailActivity;
+import com.example.kidusmt.movieapp.ui.splash.SplashActivity;
 import com.example.kidusmt.movieapp.util.App;
 import com.squareup.picasso.Picasso;
 
@@ -37,20 +38,22 @@ public class MovieViewHolder extends RecyclerView.ViewHolder {
     public void update(List<Movie> posts) {
         Movie movie = posts.get(getAdapterPosition());
 
-        movieTitle.setText(movie.getTitle());
-        movieRating.setText(movie.getVoteAverage().toString());
-        movieGenre.setText(App.getGenre(movie.getGenreIds()));
+        movieTitle.setText(movie.title);
+        //TODO check is the String.format() method is correct
+        movieRating.setText(String.format("%s", movie.voteAverage));
+        movieGenre.setText(SplashActivity.getGenre(movie.genreIds));
         //THIS CAN GET TURNED ON WHEN WE HAVE THERE IS AN API TO CONSUME
         Picasso.with(moviePoster.getContext())
-                .load(movie.getPosterPath())
+                .load(movie.posterPath)
                 .placeholder(R.color.colorAccent)
                 .into(moviePoster);
 //        Log.e("----->",movie.getPosterPath());
         moviePoster.setOnClickListener(
                 v -> moviePoster.getContext().startActivity(new Intent(moviePoster.getContext(),
                         MovieDetailActivity.class)
-                        .putExtra("movie_id",movie.getId())
-                        .putExtra("movie_review",movie.getOverview())
-                        .putExtra("movie_backdrop",movie.getBackdropPath())));
+                        //TODO check weather its _id or id ??
+                        .putExtra("movie_id",movie._id)
+                        .putExtra("movie_review",movie.overview)
+                        .putExtra("movie_backdrop",movie.backdropPath)));
     }
 }

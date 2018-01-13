@@ -1,12 +1,8 @@
 package com.example.kidusmt.movieapp.data.movie.remote;
 
-import com.example.kidusmt.movieapp.data.movie.Movie;
-import com.example.kidusmt.movieapp.data.movie.MovieUpComing;
-import com.example.kidusmt.movieapp.data.movie.MovieInTheater;
-import com.example.kidusmt.movieapp.data.movie.MoviePopular;
-import com.example.kidusmt.movieapp.data.movie.MovieTopRated;
 import com.example.kidusmt.movieapp.data.movie.MoviesResponse;
 import com.example.kidusmt.movieapp.util.App;
+import com.example.kidusmt.movieapp.util.Constants;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,7 +49,7 @@ public class MovieRemote implements MovieRemoteContract{
     @Override
     public Observable<List<MovieDto>> getMovies(String clientId, String category) {
         final List<MovieDto> movies = new ArrayList<>();
-        movieService.getMovies(App.API_KEY, category)
+        movieService.getMovies(Constants.API_KEY, category)
                 .enqueue(new Callback<MoviesResponse>() {
                     @Override
                     public void onResponse(Call<MoviesResponse> call, Response<MoviesResponse> response) {
@@ -75,38 +71,38 @@ public class MovieRemote implements MovieRemoteContract{
      * @return API Service
      */
 
-    @Override
-    public Observable<List<MoviePopular>> getPopularMovie(String clientId) {
-//        return movieService.getPopularMovies(App.API_KEY);
-//                .enqueue(new Callback<MoviesResponse>() {
-//                    @Override
-//                    public void onResponse(Call<MoviesResponse> call, Response<MoviesResponse> response) {
-//                        final List<MoviePopular> populars = new ArrayList<>();
-//                        populars = response.body().getResults();
-//                        return
-//                    }
+//    @Override
+//    public Observable<List<MoviePopular>> getPopularMovie(String clientId) {
+////        return movieService.getPopularMovies(App.API_KEY);
+////                .enqueue(new Callback<MoviesResponse>() {
+////                    @Override
+////                    public void onResponse(Call<MoviesResponse> call, Response<MoviesResponse> response) {
+////                        final List<MoviePopular> populars = new ArrayList<>();
+////                        populars = response.body().getResults();
+////                        return
+////                    }
+////
+////                    @Override
+////                    public void onFailure(Call<MoviesResponse> call, Throwable t) {
+////                        //TODO have to handle the failure
+////                    }
+////                });
+//        return null;
+//    }
 //
-//                    @Override
-//                    public void onFailure(Call<MoviesResponse> call, Throwable t) {
-//                        //TODO have to handle the failure
-//                    }
-//                });
-        return null;
-    }
-
-    @Override
-    public Observable<List<MovieTopRated>> getTopRatedMovie(String clientId) {
-        //TODO the same implementation as the above one
-        return null;
-    }
-
-    @Override
-    public Observable<List<MovieInTheater>> getInTheaterMovie(String clientId) {
-        return null;
-    }
-
-    @Override
-    public Observable<List<MovieUpComing>> getUpComingMovie(String clientId) {
-        return null;
-    }
+//    @Override
+//    public Observable<List<MovieTopRated>> getTopRatedMovie(String clientId) {
+//        //TODO the same implementation as the above one
+//        return null;
+//    }
+//
+//    @Override
+//    public Observable<List<MovieInTheater>> getInTheaterMovie(String clientId) {
+//        return null;
+//    }
+//
+//    @Override
+//    public Observable<List<MovieUpComing>> getUpComingMovie(String clientId) {
+//        return null;
+//    }
 }

@@ -1,5 +1,7 @@
 package com.example.kidusmt.movieapp.data.movie;
 
+import com.example.kidusmt.movieapp.data.movie.remote.MovieDto;
+
 import java.util.List;
 
 import io.reactivex.Observable;
@@ -10,27 +12,33 @@ import io.reactivex.Observable;
 
 public interface RepoMovieContract {
 
-    Observable<List<MoviePopular>> getPopularMovies();
+    Observable<List<Movie>> getMovies();
 
-    Observable<List<MovieTopRated>> getTopRatedMovies();
+//    Observable<List<MoviePopular>> getPopularMovies();
+//
+//    Observable<List<MovieTopRated>> getTopRatedMovies();
+//
+//    Observable<List<MovieUpComing>> getUpComingMovies();
+//
+//    Observable<List<MovieInTheater>> getInTheaterMovies();
 
-    Observable<List<MovieUpComing>> getUpComingMovies();
+    Observable<Boolean> updateMovies(MovieDto movieDto);
 
-    Observable<List<MovieInTheater>> getInTheaterMovies();
+//    Observable<Boolean> updatePopularMovies(MoviePopular moviePopular);
+//
+//    Observable<Boolean> updateTopRatedMovie(MovieTopRated movieTopRated);
+//
+//    Observable<Boolean> updateUpComingMovie(MovieUpComing movieUpComing);
+//
+//    Observable<Boolean> updateInTheater(MovieInTheater movieInTheater);
 
-    Observable<Boolean> updatePopularMovies(MoviePopular moviePopular);
+    int size();
 
-    Observable<Boolean> updateTopRatedMovie(MovieTopRated movieTopRated);
-
-    Observable<Boolean> updateUpComingMovie(MovieUpComing movieUpComing);
-
-    Observable<Boolean> updateInTheater(MovieInTheater movieInTheater);
-
-    int popularSize();
-
-    int topRatedSize();
-
-    int upComingSize();
-
-    int inTheaterSize();
+//    int popularSize();
+//
+//    int topRatedSize();
+//
+//    int upComingSize();
+//
+//    int inTheaterSize();
 }

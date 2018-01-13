@@ -1,10 +1,5 @@
 package com.example.kidusmt.movieapp.ui.home;
 
-import com.example.kidusmt.movieapp.data.movie.Movie;
-import com.example.kidusmt.movieapp.data.movie.MovieInTheater;
-import com.example.kidusmt.movieapp.data.movie.MoviePopular;
-import com.example.kidusmt.movieapp.data.movie.MovieTopRated;
-import com.example.kidusmt.movieapp.data.movie.MovieUpComing;
 import com.example.kidusmt.movieapp.data.movie.RepoMovieContract;
 
 import java.util.List;

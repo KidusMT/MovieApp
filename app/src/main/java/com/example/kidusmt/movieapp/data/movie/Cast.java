@@ -1,6 +1,7 @@
 package com.example.kidusmt.movieapp.data.movie;
 
 import com.example.kidusmt.movieapp.util.App;
+import com.example.kidusmt.movieapp.util.Constants;
 import com.google.gson.annotations.SerializedName;
 
 public class Cast {
@@ -79,7 +80,7 @@ public class Cast {
     }
 
     public String getProfilePath() {
-        return App.TMDB_IMAGE_PATH + profilePath;
+        return Constants.TMDB_IMAGE_PATH + profilePath;
     }
 
     public void setProfilePath(String profilePath) {

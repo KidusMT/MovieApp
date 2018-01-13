@@ -44,4 +44,5 @@ ext{
     rxandroidVersion = '2.0.1'
     objectboxVersion = '1.2.1'
     picassoVersion = '2.5.2'
+    gsonVersion = '2.8.0'
 }

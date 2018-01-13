@@ -3,6 +3,7 @@ package com.example.kidusmt.movieapp.ui.home;
 import com.example.kidusmt.movieapp.data.movie.local.MovieLocalContract;
 import com.example.kidusmt.movieapp.data.movie.remote.MovieRemoteContract;
 import com.example.kidusmt.movieapp.util.App;
+import com.example.kidusmt.movieapp.util.Constants;
 
 public class MoviesPresenter implements HomeContract.Presenter {
 
@@ -23,10 +24,10 @@ public class MoviesPresenter implements HomeContract.Presenter {
                 movies -> {
                     if (movies.isEmpty()) {
                         remote
-                                .getMovies(App.API_KEY, category)
+                                .getMovies(Constants.API_KEY, category)
                                 .map(dtos -> {
 
-                                })
+                                });
                     }
                 }
         );

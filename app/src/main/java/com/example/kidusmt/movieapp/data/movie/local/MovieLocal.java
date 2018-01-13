@@ -1,10 +1,6 @@
 package com.example.kidusmt.movieapp.data.movie.local;
 
 import com.example.kidusmt.movieapp.data.movie.Movie;
-import com.example.kidusmt.movieapp.data.movie.MovieInTheater;
-import com.example.kidusmt.movieapp.data.movie.MoviePopular;
-import com.example.kidusmt.movieapp.data.movie.MovieTopRated;
-import com.example.kidusmt.movieapp.data.movie.MovieUpComing;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,5 +44,10 @@ public class MovieLocal implements MovieLocalContract {
                 .build();
         query.remove();
         return Observable.just(true);
+    }
+
+    @Override
+    public int size() {
+        return box.getAll().size();
     }
 }

@@ -31,4 +31,9 @@ public interface MovieLocalContract {
      * Deletes all the movies from storage
      */
     Observable<Boolean> deleteAll(String category);
+
+    /**
+     * Retrieves the amount of posts saved on the device.
+     */
+    int size();
 }

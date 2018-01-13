@@ -1,6 +1,7 @@
 package com.example.kidusmt.movieapp.data.movie.remote;
 
 import com.example.kidusmt.movieapp.util.App;
+import com.example.kidusmt.movieapp.util.Constants;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
@@ -50,7 +51,7 @@ public class MovieDto {
     }
 
     public String getPosterPath() {
-        return App.TMDB_IMAGE_PATH + posterPath;
+        return Constants.TMDB_IMAGE_PATH + posterPath;
     }
 
     public void setPosterPath(String posterPath) {
@@ -106,7 +107,7 @@ public class MovieDto {
     }
 
     public String getBackdropPath() {
-        return App.TMDB_IMAGE_PATH + backdropPath;
+        return Constants.TMDB_IMAGE_PATH + backdropPath;
     }
 
     public void setBackdropPath(String backdropPath) {

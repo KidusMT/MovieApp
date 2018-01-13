@@ -5,19 +5,9 @@ import android.graphics.Rect;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import com.example.kidusmt.movieapp.data.movie.Genre;
-import com.example.kidusmt.movieapp.data.movie.GenreResponse;
 import com.example.kidusmt.movieapp.data.movie.MyObjectBox;
-import com.example.kidusmt.movieapp.data.movie.remote.MovieRemote;
-import com.example.kidusmt.movieapp.data.movie.remote.MovieService;
-
-import java.util.HashMap;
-import java.util.List;
 
 import io.objectbox.BoxStore;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 //import com.facebook.FacebookSdk;
 //import com.facebook.appevents.AppEventsLogger;
@@ -28,13 +18,6 @@ import retrofit2.Response;
 
 public class App extends Application {
 
-    public final static String API_KEY = "a0757b4d3c350c0a8c4cbf0f561b7edd";
-    public static final String TMDB_IMAGE_PATH = "http://image.tmdb.org/t/p/w500";
-
-    public static HashMap<Integer,String> genreIds = new HashMap();
-
-    Call<GenreResponse> callGenreRated;
-
     public static BoxStore boxStore;
 
     @Override
@@ -44,40 +27,12 @@ public class App extends Application {
         //Initializes ObjectBox for the first time when application runs
         if (boxStore == null) boxStore = MyObjectBox.builder().androidContext(this).build();
 
-        //This retrofit callBack is for fetching genreLists
-        callGenreRated = MovieRemote.movieService.getGenreList(App.API_KEY);
-
-        callGenreRated.enqueue(new Callback<GenreResponse>() {
-            @Override
-            public void onResponse(Call<GenreResponse> call, Response<GenreResponse> response) {
-                List<Genre> genreList = response.body().getGenres();
-
-                for(Genre genre: genreList){
-                    genreIds.put(genre.getId(),genre.getName());
-                }
-            }
-
-            @Override
-            public void onFailure(Call<GenreResponse> call, Throwable t) {
-               //TODO find a way to tell users that it does not have a genre name yet
-            }
-        });
-
     }
 
     /**
      * RecyclerView item decoration - give equal margin around grid item
      */
-    public static String getGenre(List<Integer> genres){
-        String genre_string = "";
-        for(int x: genres){
-            genre_string += genreIds.get(x)+", ";
-        }
-
-        return genre_string;
-    }
-
-    public static class GridSpacingItemDecoration extends RecyclerView.ItemDecoration {
+     public static class GridSpacingItemDecoration extends RecyclerView.ItemDecoration {
         private int spanCount;
         private int spacing;
 

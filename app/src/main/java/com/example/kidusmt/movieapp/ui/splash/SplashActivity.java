@@ -10,8 +10,20 @@ import android.widget.ImageView;
 
 import com.example.kidusmt.movieapp.R;
 import com.example.kidusmt.movieapp.base.view.BaseActivity;
+import com.example.kidusmt.movieapp.data.movie.Genre;
+import com.example.kidusmt.movieapp.data.movie.GenreResponse;
+import com.example.kidusmt.movieapp.data.movie.remote.MovieRemote;
 import com.example.kidusmt.movieapp.ui.home.HomeActivity;
 import com.example.kidusmt.movieapp.ui.login.LoginActivity;
+import com.example.kidusmt.movieapp.util.App;
+import com.example.kidusmt.movieapp.util.Constants;
+
+import java.util.HashMap;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by KidusMT on 12/25/2017.
@@ -24,6 +36,10 @@ public class SplashActivity extends BaseActivity {
     public SharedPreferences pref;
     public SharedPreferences.Editor editor;
 
+    public static HashMap<Integer,String> genreIds = new HashMap();
+
+    Call<GenreResponse> callGenreRated;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,6 +47,8 @@ public class SplashActivity extends BaseActivity {
 
         pref = getSharedPreferences("MovieApp",MODE_PRIVATE);
 
+        //for fetching the genres from the API
+        getGenres();
         
 
         ImageView splashLogo = findViewById(R.id.iv_splash_img);
@@ -64,6 +82,36 @@ public class SplashActivity extends BaseActivity {
             }
         });
 
+    }
+
+    public void getGenres(){
+        //This retrofit callBack is for fetching genreLists
+        callGenreRated = MovieRemote.movieService.getGenreList(Constants.API_KEY);
+
+        callGenreRated.enqueue(new Callback<GenreResponse>() {
+            @Override
+            public void onResponse(Call<GenreResponse> call, Response<GenreResponse> response) {
+                List<Genre> genreList = response.body().getGenres();
+
+                for(Genre genre: genreList){
+                    genreIds.put(genre.getId(),genre.getName());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<GenreResponse> call, Throwable t) {
+                //TODO find a way to tell users that it does not have a genre name yet
+            }
+        });
+    }
+
+    public static String getGenre(List<Integer> genres){
+        String genre_string = "";
+        for(int x: genres){
+            genre_string += genreIds.get(x)+", ";
+        }
+
+        return genre_string;
     }
 
     public void skipSplashScreen(View v){
