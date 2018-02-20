@@ -1,8 +1,7 @@
-package com.example.kidusmt.movieapp.data.movie.remote;
+package com.example.kidusmt.movieapp.data.remote.movie;
 
-import com.example.kidusmt.movieapp.data.movie.MoviesResponse;
-import com.example.kidusmt.movieapp.util.App;
 import com.example.kidusmt.movieapp.util.Constants;
+import com.example.kidusmt.movieapp.util.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,13 +23,12 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class MovieRemote implements MovieRemoteContract{
 
     public static MovieService movieService;
-    public static String BASE_URL = "http://api.themoviedb.org/3/";
     private static Retrofit retrofit = null;
 
     public MovieRemote(){
         if(retrofit==null){
             retrofit = new Retrofit.Builder()
-                    .baseUrl(BASE_URL)
+                    .baseUrl(Constants.BASE_URL)
                     .addConverterFactory(GsonConverterFactory.create())
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .client(createClient())
@@ -64,45 +62,4 @@ public class MovieRemote implements MovieRemoteContract{
                 });
         return Observable.just(movies);
     }
-
-    /**
-     * Get API Service
-     *
-     * @return API Service
-     */
-
-//    @Override
-//    public Observable<List<MoviePopular>> getPopularMovie(String clientId) {
-////        return movieService.getPopularMovies(App.API_KEY);
-////                .enqueue(new Callback<MoviesResponse>() {
-////                    @Override
-////                    public void onResponse(Call<MoviesResponse> call, Response<MoviesResponse> response) {
-////                        final List<MoviePopular> populars = new ArrayList<>();
-////                        populars = response.body().getResults();
-////                        return
-////                    }
-////
-////                    @Override
-////                    public void onFailure(Call<MoviesResponse> call, Throwable t) {
-////                        //TODO have to handle the failure
-////                    }
-////                });
-//        return null;
-//    }
-//
-//    @Override
-//    public Observable<List<MovieTopRated>> getTopRatedMovie(String clientId) {
-//        //TODO the same implementation as the above one
-//        return null;
-//    }
-//
-//    @Override
-//    public Observable<List<MovieInTheater>> getInTheaterMovie(String clientId) {
-//        return null;
-//    }
-//
-//    @Override
-//    public Observable<List<MovieUpComing>> getUpComingMovie(String clientId) {
-//        return null;
-//    }
 }

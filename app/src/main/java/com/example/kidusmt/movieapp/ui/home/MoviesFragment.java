@@ -10,10 +10,14 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.example.kidusmt.movieapp.R;
 import com.example.kidusmt.movieapp.base.view.BaseFragment;
-import com.example.kidusmt.movieapp.data.movie.Movie;
+import com.example.kidusmt.movieapp.data.RepoMovie;
+import com.example.kidusmt.movieapp.data.local.movie.Movie;
+import com.example.kidusmt.movieapp.data.local.movie.MovieLocal;
+import com.example.kidusmt.movieapp.data.remote.movie.MovieRemote;
 import com.example.kidusmt.movieapp.util.App;
 
 import java.util.List;
@@ -21,9 +25,8 @@ import java.util.List;
 public class MoviesFragment extends BaseFragment implements HomeContract.View {
 
     private static final String ARG_CATEGORY = "CATEGORY";
-    private RecyclerView recyclerView;
-    private MovieAdapter adapter;
 
+    //TODO what is this for?? and I haven't also used it.
     public static MoviesFragment newInstance(String category) {
         MoviesFragment fragment = new MoviesFragment();
 
@@ -38,28 +41,36 @@ public class MoviesFragment extends BaseFragment implements HomeContract.View {
 
     private String category;
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        presenter = new MoviesPresenter(
+                new MovieLocal(App.boxStore),
+                new MovieRemote());
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View root = super.onCreateView(inflater, container, savedInstanceState);
+        //TODO what is the purpose of this savedInstanceState being inserted here as a parameter
+//        View root = super.onCreateView(inflater, container, savedInstanceState);
 
-        Bundle args = getArguments();
-        category = args.getString(ARG_CATEGORY);
-        if (category == null) throw new NullPointerException("Category is null");
+        View root = inflater.inflate(R.layout.fragment_movie,container,false);
 
-        // TODO: Initialize UI components
-        recyclerView = root.findViewById(R.id.recycler_view_top_rated);
+//        Bundle args = getArguments();
+//        category = args.getString(ARG_CATEGORY);
+//        if (category == null) throw new NullPointerException("Category is null");
+
+        RecyclerView recyclerView = root.findViewById(R.id.recycler_view_movie);
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getActivity(), 2);
         recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.addItemDecoration(
                 new App.GridSpacingItemDecoration(2, dpToPx(10), true));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
-        adapter = new MovieAdapter(presenter);//movieList is needed
+        MovieAdapter adapter = new MovieAdapter(presenter);
         recyclerView.setAdapter(adapter);
 
-        recyclerView.setAdapter(adapter);
         return root;
     }
 
@@ -110,6 +121,7 @@ public class MoviesFragment extends BaseFragment implements HomeContract.View {
     public void onStart() {
         super.onStart();
         presenter.attachView(this);
+//        presenter.loadMovies();
     }
 
     @Override

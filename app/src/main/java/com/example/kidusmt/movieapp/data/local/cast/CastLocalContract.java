@@ -1,6 +1,6 @@
-package com.example.kidusmt.movieapp.data.movie.local;
+package com.example.kidusmt.movieapp.data.local.cast;
 
-import com.example.kidusmt.movieapp.data.movie.Movie;
+import com.example.kidusmt.movieapp.data.local.movie.Movie;
 
 import java.util.List;
 
@@ -10,7 +10,7 @@ import io.reactivex.Observable;
  * Created by KidusMT on 1/4/2018.
  */
 
-public interface MovieLocalContract {
+public interface CastLocalContract {
 
     /**
      * Save all the movies on local storage

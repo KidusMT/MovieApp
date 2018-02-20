@@ -14,11 +14,11 @@ import android.widget.TextView;
 
 import com.example.kidusmt.movieapp.R;
 import com.example.kidusmt.movieapp.base.view.BaseActivity;
-import com.example.kidusmt.movieapp.data.movie.Cast;
-import com.example.kidusmt.movieapp.data.movie.CastResponse;
-import com.example.kidusmt.movieapp.data.movie.remote.MovieRemote;
+import com.example.kidusmt.movieapp.data.remote.cast.Cast;
+import com.example.kidusmt.movieapp.data.remote.cast.CastRemote;
+import com.example.kidusmt.movieapp.data.remote.cast.CastResponse;
+import com.example.kidusmt.movieapp.data.remote.movie.MovieRemote;
 import com.example.kidusmt.movieapp.ui.home.HomeActivity;
-import com.example.kidusmt.movieapp.util.App;
 import com.example.kidusmt.movieapp.util.Constants;
 import com.example.kidusmt.movieapp.util.RecyclerItemClickListener;
 import com.squareup.picasso.Picasso;
@@ -76,7 +76,8 @@ public class MovieDetailActivity extends BaseActivity implements MovieDetailCont
 
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
-        callDetail = MovieRemote.movieService.getCastList(movieId, Constants.API_KEY);
+
+        callDetail = CastRemote.service.getCastList(movieId, Constants.API_KEY);
 
         callDetail.enqueue(new Callback<CastResponse>() {
             @Override
@@ -141,7 +142,7 @@ public class MovieDetailActivity extends BaseActivity implements MovieDetailCont
 
     @Override
     public void showDetail(List<Cast> castList) {
-        castAdapter = new CastAdapter(this, castList);
+        castAdapter = new CastAdapter(presenter);
         recyclerView.setAdapter(castAdapter);
     }
 
@@ -159,5 +160,33 @@ public class MovieDetailActivity extends BaseActivity implements MovieDetailCont
     public void openHomeActivity() {
         //TODO think about how to go back to the specific tab you where working to rather than opening HomeActivity by default
         startActivity(new Intent(this, HomeActivity.class));
+    }
+
+    @Override
+    public void attachPresenter(MovieDetailContract.Presenter presenter) {
+        this.presenter = presenter;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        presenter.attachView(this);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        presenter.start();
+    }
+
+    @Override
+    public void onPause() {
+        presenter.detachView();
+        super.onPause();
+    }
+
+    @Override
+    public void close() {
+        finish();
     }
 }

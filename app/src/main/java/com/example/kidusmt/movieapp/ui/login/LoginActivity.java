@@ -8,6 +8,7 @@ import android.widget.Button;
 import com.example.kidusmt.movieapp.R;
 import com.example.kidusmt.movieapp.base.view.BaseActivity;
 import com.example.kidusmt.movieapp.ui.home.HomeActivity;
+import com.facebook.FacebookSdk;
 import com.facebook.login.widget.LoginButton;
 
 /**
@@ -16,12 +17,13 @@ import com.facebook.login.widget.LoginButton;
 
 public class LoginActivity extends BaseActivity {
 
-    Button btn_login, btn_fb_login;
+    Button btn_login;//, btn_fb_login;
     LoginButton fb_login;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
+        FacebookSdk.sdkInitialize(this);
         setContentView(R.layout.activity_login);
 
         //HIDING SOFT INPUT KEYBOARD

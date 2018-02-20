@@ -10,13 +10,13 @@ import android.widget.ImageView;
 
 import com.example.kidusmt.movieapp.R;
 import com.example.kidusmt.movieapp.base.view.BaseActivity;
-import com.example.kidusmt.movieapp.data.movie.Genre;
-import com.example.kidusmt.movieapp.data.movie.GenreResponse;
-import com.example.kidusmt.movieapp.data.movie.remote.MovieRemote;
-import com.example.kidusmt.movieapp.ui.home.HomeActivity;
+import com.example.kidusmt.movieapp.data.remote.genre.Genre;
+import com.example.kidusmt.movieapp.data.remote.genre.GenreRemote;
+import com.example.kidusmt.movieapp.data.remote.genre.GenreResponse;
+import com.example.kidusmt.movieapp.data.remote.movie.MovieRemote;
 import com.example.kidusmt.movieapp.ui.login.LoginActivity;
-import com.example.kidusmt.movieapp.util.App;
 import com.example.kidusmt.movieapp.util.Constants;
+import com.facebook.FacebookSdk;
 
 import java.util.HashMap;
 import java.util.List;
@@ -43,12 +43,14 @@ public class SplashActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        FacebookSdk.sdkInitialize(this);
         setContentView(R.layout.activity_splash);
+
 
         pref = getSharedPreferences("MovieApp",MODE_PRIVATE);
 
         //for fetching the genres from the API
-        getGenres();
+//        getGenres();
         
 
         ImageView splashLogo = findViewById(R.id.iv_splash_img);
@@ -86,7 +88,7 @@ public class SplashActivity extends BaseActivity {
 
     public void getGenres(){
         //This retrofit callBack is for fetching genreLists
-        callGenreRated = MovieRemote.movieService.getGenreList(Constants.API_KEY);
+        callGenreRated = GenreRemote.genreService.getGenreList(Constants.API_KEY);
 
         callGenreRated.enqueue(new Callback<GenreResponse>() {
             @Override

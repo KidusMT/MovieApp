@@ -1,4 +1,4 @@
-package com.example.kidusmt.movieapp.data.movie;
+package com.example.kidusmt.movieapp.data;
 
 import java.util.HashMap;
 

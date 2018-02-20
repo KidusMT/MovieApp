@@ -1,6 +1,6 @@
-package com.example.kidusmt.movieapp.data.movie;
+package com.example.kidusmt.movieapp.data.remote.movie;
 
-import com.example.kidusmt.movieapp.data.movie.remote.MovieDto;
+import com.example.kidusmt.movieapp.data.remote.movie.MovieDto;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;

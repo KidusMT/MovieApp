@@ -5,7 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.kidusmt.movieapp.data.movie.Movie;
+import com.example.kidusmt.movieapp.data.local.movie.Movie;
 import com.example.kidusmt.movieapp.R;
 
 import java.util.ArrayList;

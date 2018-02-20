@@ -1,8 +1,6 @@
 package com.example.kidusmt.movieapp.util;
 
-import android.support.annotation.NonNull;
 import android.util.Log;
-import android.widget.Toast;
 
 /**
  * Common class for functionality such as logging.
@@ -12,7 +10,7 @@ public class Utils {
     /**
      * Global debug tag string - very useful for filtering everything out.
      */
-    public static final String TAG = "DEV-MISIL-APP";
+    public static final String TAG = "MOVIE-APP";
 
     /**
      * Show a debug message to the Android Logcat

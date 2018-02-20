@@ -1,6 +1,8 @@
 package com.example.kidusmt.movieapp.ui.detail;
 
-import com.example.kidusmt.movieapp.data.movie.Cast;
+import com.example.kidusmt.movieapp.base.mvp.BasePresenter;
+import com.example.kidusmt.movieapp.base.mvp.BaseView;
+import com.example.kidusmt.movieapp.data.remote.cast.Cast;
 
 import java.util.List;
 
@@ -10,7 +12,7 @@ import java.util.List;
 
 public interface MovieDetailContract {
 
-    interface View{
+    interface View extends BaseView<Presenter> {
 
         /**
          * opens
@@ -35,7 +37,7 @@ public interface MovieDetailContract {
         void openHomeActivity();
     }
 
-    interface Presenter{
+    interface Presenter extends BasePresenter<View> {
 
         /**
          * load the credit's card for all the casts

@@ -5,7 +5,7 @@ import android.graphics.Rect;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import com.example.kidusmt.movieapp.data.movie.MyObjectBox;
+import com.example.kidusmt.movieapp.data.local.movie.MyObjectBox;
 
 import io.objectbox.BoxStore;
 

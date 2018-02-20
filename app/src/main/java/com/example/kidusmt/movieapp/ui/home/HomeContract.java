@@ -2,7 +2,7 @@ package com.example.kidusmt.movieapp.ui.home;
 
 import com.example.kidusmt.movieapp.base.mvp.BasePresenter;
 import com.example.kidusmt.movieapp.base.mvp.BaseView;
-import com.example.kidusmt.movieapp.data.movie.Movie;
+import com.example.kidusmt.movieapp.data.local.movie.Movie;
 
 import java.util.List;
 
@@ -20,13 +20,8 @@ public interface HomeContract {
         void showProgress();
         void hideProgress();
 
+        //what is going on here? why String? as a return object
         String getCategory();
-/*
-        void showPopularMovies(List<MoviePopular> moviePopulars);
-        void showUpComingMovies(List<MovieUpComing> movieUpComings);
-        void showInTheaterMovies(List<MovieInTheater> movieInTheaters);
-        void showTopRatedMovies(List<MovieTopRated> movieTopRated);
-*/
 
         //open the detail activity for the specific movie card clicked
         void openMovieDetail(int position);
@@ -43,5 +38,8 @@ public interface HomeContract {
 
         //performs the refresh for the page reloading
         void onSwippedDownToRefresh();
+
+        //retrieve movie from the movie db
+        void loadMovies();
     }
 }

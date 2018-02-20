@@ -12,7 +12,7 @@
 //
 //import com.example.kidusmt.movieapp.R;
 //import com.example.kidusmt.movieapp.base.view.BaseFragment;
-//import com.example.kidusmt.movieapp.data.Movie;
+//import com.example.kidusmt.movieapp.data.local.movie.Movie;
 //import com.example.kidusmt.movieapp.data.MoviesResponse;
 //import com.example.kidusmt.movieapp.data.rest.ApiClient;
 //import com.example.kidusmt.movieapp.util.App;

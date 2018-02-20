@@ -5,7 +5,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.example.kidusmt.movieapp.R;
-import com.example.kidusmt.movieapp.data.movie.Cast;
+import com.example.kidusmt.movieapp.data.remote.cast.Cast;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;

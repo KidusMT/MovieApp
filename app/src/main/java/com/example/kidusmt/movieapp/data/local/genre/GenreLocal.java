@@ -1,6 +1,8 @@
-package com.example.kidusmt.movieapp.data.movie.local;
+package com.example.kidusmt.movieapp.data.local.genre;
 
-import com.example.kidusmt.movieapp.data.movie.Movie;
+import com.example.kidusmt.movieapp.data.local.movie.Movie;
+import com.example.kidusmt.movieapp.data.local.movie.MovieLocalContract;
+import com.example.kidusmt.movieapp.data.local.movie.Movie_;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,11 +15,11 @@ import io.reactivex.Observable;
 /**
  *
  */
-public class MovieLocal implements MovieLocalContract {
+public class GenreLocal implements MovieLocalContract {
 
     private Box<Movie> box;
 
-    public MovieLocal(BoxStore store) {
+    public GenreLocal(BoxStore store) {
         box = store.boxFor(Movie.class);
     }
 

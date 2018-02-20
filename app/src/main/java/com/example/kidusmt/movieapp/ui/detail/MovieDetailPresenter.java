@@ -1,6 +1,6 @@
 package com.example.kidusmt.movieapp.ui.detail;
 
-import com.example.kidusmt.movieapp.data.movie.Cast;
+import com.example.kidusmt.movieapp.data.remote.cast.Cast;
 
 import java.util.List;
 
@@ -32,5 +32,25 @@ public class MovieDetailPresenter implements MovieDetailContract.Presenter{
     @Override
     public void onBackArrowClicked() {
 
+    }
+
+    @Override
+    public void start() {
+
+    }
+
+    @Override
+    public void attachView(MovieDetailContract.View view) {
+
+    }
+
+    @Override
+    public void detachView() {
+
+    }
+
+    @Override
+    public MovieDetailContract.View getView() {
+        return null;
     }
 }

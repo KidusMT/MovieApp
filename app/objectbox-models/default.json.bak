@@ -1,0 +1,43 @@
+{
+  "_note1": "KEEP THIS FILE! Check it into a version control system (VCS) like git.",
+  "_note2": "ObjectBox manages crucial IDs for your object model. See docs for details.",
+  "_note3": "If you have VCS merge conflicts, you must resolve them according to ObjectBox docs.",
+  "entities": [
+    {
+      "id": "1:8455479686434763261",
+      "lastPropertyId": "4:95684474238376937",
+      "name": "Onion",
+      "properties": [
+        {
+          "id": "1:6272847319935872611",
+          "name": "id"
+        },
+        {
+          "id": "2:2787698520245402942",
+          "indexId": "1:1870537174854867878",
+          "name": "_id"
+        },
+        {
+          "id": "3:6443299696786743818",
+          "name": "color"
+        },
+        {
+          "id": "4:95684474238376937",
+          "name": "weight"
+        }
+      ],
+      "relations": []
+    }
+  ],
+  "lastEntityId": "1:8455479686434763261",
+  "lastIndexId": "1:1870537174854867878",
+  "lastRelationId": "0:0",
+  "lastSequenceId": "0:0",
+  "modelVersion": 4,
+  "modelVersionParserMinimum": 4,
+  "retiredEntityUids": [],
+  "retiredIndexUids": [],
+  "retiredPropertyUids": [],
+  "retiredRelationUids": [],
+  "version": 1
+}

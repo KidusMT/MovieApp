@@ -4,40 +4,81 @@
   "_note3": "If you have VCS merge conflicts, you must resolve them according to ObjectBox docs.",
   "entities": [
     {
-      "id": "1:8455479686434763261",
-      "lastPropertyId": "4:95684474238376937",
-      "name": "Onion",
+      "id": "2:7595254003313238607",
+      "lastPropertyId": "12:8862574921690270791",
+      "name": "Movie",
       "properties": [
         {
-          "id": "1:6272847319935872611",
+          "id": "1:2304573243058507998",
           "name": "id"
         },
         {
-          "id": "2:2787698520245402942",
-          "indexId": "1:1870537174854867878",
+          "id": "2:2059689840176353449",
+          "indexId": "2:2233443540047996370",
           "name": "_id"
         },
         {
-          "id": "3:6443299696786743818",
-          "name": "color"
+          "id": "3:3766670279606241933",
+          "name": "posterPath"
         },
         {
-          "id": "4:95684474238376937",
-          "name": "weight"
+          "id": "4:5071503230088053636",
+          "name": "overview"
+        },
+        {
+          "id": "5:665045449435523913",
+          "name": "releaseDate"
+        },
+        {
+          "id": "6:5501534065158719967",
+          "name": "genreIds"
+        },
+        {
+          "id": "7:4301645005054584418",
+          "name": "originalTitle"
+        },
+        {
+          "id": "8:4248043785952655015",
+          "name": "title"
+        },
+        {
+          "id": "9:2005271796085808791",
+          "name": "backdropPath"
+        },
+        {
+          "id": "10:8170316584343763164",
+          "name": "voteAverage"
+        },
+        {
+          "id": "11:2337228098379516717",
+          "name": "voteCount"
+        },
+        {
+          "id": "12:8862574921690270791",
+          "name": "category"
         }
       ],
       "relations": []
     }
   ],
-  "lastEntityId": "1:8455479686434763261",
-  "lastIndexId": "1:1870537174854867878",
+  "lastEntityId": "2:7595254003313238607",
+  "lastIndexId": "2:2233443540047996370",
   "lastRelationId": "0:0",
   "lastSequenceId": "0:0",
   "modelVersion": 4,
   "modelVersionParserMinimum": 4,
-  "retiredEntityUids": [],
-  "retiredIndexUids": [],
-  "retiredPropertyUids": [],
+  "retiredEntityUids": [
+    8455479686434763261
+  ],
+  "retiredIndexUids": [
+    1870537174854867878
+  ],
+  "retiredPropertyUids": [
+    6272847319935872611,
+    2787698520245402942,
+    6443299696786743818,
+    95684474238376937
+  ],
   "retiredRelationUids": [],
   "version": 1
 }

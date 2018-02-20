@@ -1,8 +1,7 @@
 package com.example.kidusmt.movieapp.ui.home;
 
-import com.example.kidusmt.movieapp.data.movie.local.MovieLocalContract;
-import com.example.kidusmt.movieapp.data.movie.remote.MovieRemoteContract;
-import com.example.kidusmt.movieapp.util.App;
+import com.example.kidusmt.movieapp.data.local.movie.MovieLocalContract;
+import com.example.kidusmt.movieapp.data.remote.movie.MovieRemoteContract;
 import com.example.kidusmt.movieapp.util.Constants;
 
 public class MoviesPresenter implements HomeContract.Presenter {
@@ -20,17 +19,15 @@ public class MoviesPresenter implements HomeContract.Presenter {
     @Override
     public void start() {
         final String category = view.getCategory();
-        local.getByCategory(category).subscribe(
+        local.getByCategory(category)
+            .subscribe(
                 movies -> {
                     if (movies.isEmpty()) {
-                        remote
-                                .getMovies(Constants.API_KEY, category)
-                                .map(dtos -> {
-
-                                });
+                        remote.getMovies(Constants.API_KEY, category)
+                                .map(dtos -> local.getByCategory(category));
                     }
                 }
-        );
+            );
     }
 
     @Override
@@ -55,6 +52,11 @@ public class MoviesPresenter implements HomeContract.Presenter {
 
     @Override
     public void onSwippedDownToRefresh() {
+
+    }
+
+    @Override
+    public void loadMovies() {
 
     }
 }
