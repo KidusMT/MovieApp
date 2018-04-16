@@ -1,6 +1,9 @@
 package com.example.kidusmt.movieapp.data;
 
+import com.example.kidusmt.movieapp.data.local.movie.Movie;
 import com.example.kidusmt.movieapp.data.remote.movie.MovieDto;
+
+import java.util.List;
 
 import io.reactivex.Observable;
 
@@ -10,7 +13,7 @@ import io.reactivex.Observable;
 
 public interface RepoMovieContract {
 
-    Observable<Object> getMovies(String category);
+    Observable<List<Movie>> getMovies(String category);
 
     Observable<Boolean> updateMovies(MovieDto movieDto);
 

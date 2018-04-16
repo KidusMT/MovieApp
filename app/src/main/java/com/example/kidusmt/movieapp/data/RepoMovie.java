@@ -1,5 +1,6 @@
 package com.example.kidusmt.movieapp.data;
 
+import com.example.kidusmt.movieapp.data.local.movie.Movie;
 import com.example.kidusmt.movieapp.data.local.movie.MovieLocalContract;
 import com.example.kidusmt.movieapp.data.remote.movie.MovieDto;
 import com.example.kidusmt.movieapp.data.remote.movie.MovieRemoteContract;
@@ -22,14 +23,15 @@ public class RepoMovie implements RepoMovieContract {
     }
 
     @Override
-    public Observable<Object> getMovies(String category) {
+    public Observable<List<Movie>> getMovies(String category) {
         if(local.size() == 0){
             return remote.getMovies(Constants.API_KEY,category)
                     .flatMap((Function<List<MovieDto>, ObservableSource<?>>)
                             movieDtos -> local.getByCategory(category))
-                    .flatMap(o -> (ObservableSource<?>) local);
+                    .flatMap(o -> local.getByCategory(category));
+        }else {
+            return local.getByCategory(category);
         }
-        return null;
     }
 
     @Override
@@ -40,7 +42,7 @@ public class RepoMovie implements RepoMovieContract {
 
     @Override
     public int size() {
-        return 0;
+        return local.size();
     }
 
 }

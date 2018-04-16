@@ -51,8 +51,12 @@ public class MovieRemote implements MovieRemoteContract{
                 .enqueue(new Callback<MoviesResponse>() {
                     @Override
                     public void onResponse(Call<MoviesResponse> call, Response<MoviesResponse> response) {
-                        final List<MovieDto> downloaded = response.body().getResults();
-                        movies.addAll(downloaded);
+                        if(response.isSuccessful()){
+                            final List<MovieDto> downloaded = response.body().getResults();
+                            movies.addAll(downloaded);
+                        }else{
+
+                        }
                     }
 
                     @Override

@@ -26,7 +26,6 @@ public class MoviesFragment extends BaseFragment implements HomeContract.View {
 
     private static final String ARG_CATEGORY = "CATEGORY";
 
-    //TODO what is this for?? and I haven't also used it.
     public static MoviesFragment newInstance(String category) {
         MoviesFragment fragment = new MoviesFragment();
 
@@ -52,7 +51,7 @@ public class MoviesFragment extends BaseFragment implements HomeContract.View {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        //TODO what is the purpose of this savedInstanceState being inserted here as a parameter
+
 //        View root = super.onCreateView(inflater, container, savedInstanceState);
 
         View root = inflater.inflate(R.layout.fragment_movie,container,false);
@@ -99,7 +98,6 @@ public class MoviesFragment extends BaseFragment implements HomeContract.View {
 
     @Override
     public void hideProgress() {
-
     }
 
     @Override

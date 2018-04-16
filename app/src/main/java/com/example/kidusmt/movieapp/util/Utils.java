@@ -1,6 +1,8 @@
 package com.example.kidusmt.movieapp.util;
 
+import android.content.Context;
 import android.util.Log;
+import android.widget.Toast;
 
 /**
  * Common class for functionality such as logging.
@@ -65,6 +67,24 @@ public class Utils {
         } else {
             Log.d(TAG, output);
         }
+    }
+
+    /**
+     * for toast message for shorter duration
+     * @param context (required)
+     * @param message (required)
+     */
+    public static void toast(Context context, String message){
+        Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+    }
+
+    /**
+     * for toasting message for longer duration
+     * @param context (required)
+     * @param message (required)
+     */
+    public static void toastLong(Context context, String message){
+        Toast.makeText(context, message, Toast.LENGTH_LONG).show();
     }
 
 }
