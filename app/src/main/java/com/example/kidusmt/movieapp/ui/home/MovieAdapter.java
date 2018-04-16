@@ -5,10 +5,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.kidusmt.movieapp.data.local.movie.Movie;
 import com.example.kidusmt.movieapp.R;
+import com.example.kidusmt.movieapp.data.local.movie.Movie;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -20,21 +19,22 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieViewHolder> {
     private List<Movie> movieList;
     private HomeContract.Presenter presenter;
 
-    public MovieAdapter(HomeContract.Presenter presenter) {
-       this.presenter = presenter;
-        movieList = new ArrayList<>();
+    public MovieAdapter(List<Movie> movieList, HomeContract.Presenter presenter) {
+        this.presenter = presenter;
+        this.movieList = movieList;
     }
 
     @Override
     public MovieViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.movie_card, parent, false);
-        return new MovieViewHolder(itemView, presenter);
+        return new MovieViewHolder(itemView);
     }
 
     @Override
     public void onBindViewHolder(MovieViewHolder holder, int position) {
         holder.update(movieList);
+        holder.moviePoster.setOnClickListener(v -> presenter.onMovieClicked(movieList.get(holder.getAdapterPosition())));
     }
 
     //for updating and putting the recyclerView on the fragments
@@ -46,7 +46,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieViewHolder> {
 
     @Override
     public int getItemCount() {
-        return (movieList!=null)?movieList.size():0;
+        return (movieList != null) ? movieList.size() : 0;
     }
 
 }

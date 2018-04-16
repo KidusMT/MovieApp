@@ -28,12 +28,6 @@ public class MovieDetailPresenter implements MovieDetailContract.Presenter{
         view.openImage(casts.get(position).getProfilePath());
     }
 
-
-    @Override
-    public void onBackArrowClicked() {
-
-    }
-
     @Override
     public void start() {
 

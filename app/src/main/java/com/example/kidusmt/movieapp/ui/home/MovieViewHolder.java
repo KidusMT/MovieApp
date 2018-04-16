@@ -20,18 +20,15 @@ import java.util.List;
 
 public class MovieViewHolder extends RecyclerView.ViewHolder {
 
-    public TextView movieTitle,movieGenre,movieRating;
+    public TextView movieTitle, movieGenre, movieRating;
     public ImageView moviePoster;
 
-    public MovieViewHolder(View itemView, final HomeContract.Presenter presenter) {
+    public MovieViewHolder(View itemView) {
         super(itemView);
         moviePoster = itemView.findViewById(R.id.iv_movie_card_poster);
         movieTitle = itemView.findViewById(R.id.tv_movie_card_title);
         movieRating = itemView.findViewById(R.id.tv_movie_card_rating);
         movieGenre = itemView.findViewById(R.id.tv_movie_card_genre);
-
-        //Takes care of the onclick for more detail
-        moviePoster.setOnClickListener(v->presenter.onMovieClicked(getAdapterPosition()));
     }
 
     public void update(List<Movie> posts) {
@@ -51,8 +48,8 @@ public class MovieViewHolder extends RecyclerView.ViewHolder {
                 v -> moviePoster.getContext().startActivity(new Intent(moviePoster.getContext(),
                         MovieDetailActivity.class)
                         //TODO check weather its _id or id ??
-                        .putExtra("movie_id",movie._id)
-                        .putExtra("movie_review",movie.overview)
-                        .putExtra("movie_backdrop",movie.backdropPath)));
+                        .putExtra("movie_id", movie._id)
+                        .putExtra("movie_review", movie.overview)
+                        .putExtra("movie_backdrop", movie.backdropPath)));
     }
 }

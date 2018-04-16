@@ -152,11 +152,6 @@ public class MovieDetailActivity extends BaseActivity implements MovieDetailCont
     }
 
     @Override
-    public void closeActivity() {
-        finish();
-    }
-
-    @Override
     public void openHomeActivity() {
         //TODO think about how to go back to the specific tab you where working to rather than opening HomeActivity by default
         startActivity(new Intent(this, HomeActivity.class));
@@ -188,5 +183,45 @@ public class MovieDetailActivity extends BaseActivity implements MovieDetailCont
     @Override
     public void close() {
         finish();
+    }
+
+    @Override
+    public void showLoading(String message) {
+
+    }
+
+    @Override
+    public void showLoading() {
+
+    }
+
+    @Override
+    public void hideLoading() {
+
+    }
+
+    @Override
+    public void onUnknownError(String error) {
+
+    }
+
+    @Override
+    public void onTimeout() {
+
+    }
+
+    @Override
+    public void onNetworkError() {
+
+    }
+
+    @Override
+    public boolean isNetworkConnected() {
+        return false;
+    }
+
+    @Override
+    public void onConnectionError() {
+
     }
 }

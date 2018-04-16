@@ -14,4 +14,20 @@ public interface BaseView<T extends BasePresenter> {
      * Dismiss the View from the UI
      */
     void close();
+
+    void showLoading(String message);
+
+    void showLoading();
+
+    void hideLoading();
+
+    void onUnknownError(String error);
+
+    void onTimeout();
+
+    void onNetworkError();
+
+    boolean isNetworkConnected();
+
+    void onConnectionError();
 }

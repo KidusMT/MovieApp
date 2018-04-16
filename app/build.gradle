@@ -37,7 +37,10 @@ android {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
 //        implementation 'com.facebook.android:facebook-android-sdk:[4,5)'
-        implementation 'com.facebook.android:facebook-android-sdk:4.1.0'
+    implementation 'com.facebook.android:facebook-login:[4,5)'
+
+    //Material ProgressBar
+    implementation "com.pnikosis:materialish-progress:1.7"
 
     //Kotlin support
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
@@ -56,6 +59,10 @@ dependencies {
     implementation "com.google.code.gson:gson:$gsonVersion"
     implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
     implementation "com.squareup.picasso:picasso:$picassoVersion"
+
+    // OkHttp Logging Interceptor
+    implementation "com.squareup.okhttp3:okhttp:$okHttpVersion"
+    implementation "com.squareup.okhttp3:logging-interceptor:$okHttpVersion"
 
     //noinspection GradleCompatible//this does something I don't really know this time
     implementation "com.android.support:cardview-v7:$supportLibraryVersion"

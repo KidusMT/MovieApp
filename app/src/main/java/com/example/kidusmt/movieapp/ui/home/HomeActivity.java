@@ -44,10 +44,10 @@ public class HomeActivity extends BaseActivity {
 //                MoviesFragment.newInstance(Constants.CATEGORY_UPCOMING),
 //                MoviesFragment.newInstance(Constants.CATEGORY_IN_THEATER)};
 
-        adapter.addFragment(new MoviesFragment(),Constants.CATEGORY_POPULAR);
-        adapter.addFragment(new MoviesFragment(),Constants.CATEGORY_TOP_RATED);
-        adapter.addFragment(new MoviesFragment(),Constants.CATEGORY_UPCOMING);
-        adapter.addFragment(new MoviesFragment(),Constants.CATEGORY_IN_THEATER);
+        adapter.addFragment(new MoviesFragment(), Constants.CATEGORY_POPULAR);
+        adapter.addFragment(new MoviesFragment(), Constants.CATEGORY_TOP_RATED);
+        adapter.addFragment(new MoviesFragment(), Constants.CATEGORY_UPCOMING);
+        adapter.addFragment(new MoviesFragment(), Constants.CATEGORY_IN_THEATER);
 
 //        for(int i = 0; i< 4; i++){
 //            adapter.addFragment(movieTabs[i]);
@@ -56,7 +56,7 @@ public class HomeActivity extends BaseActivity {
     }
 
     //for logout from navigationDrawer
-    public void logout(){
+    public void logout() {
         startActivity(new Intent(this, LoginActivity.class));
     }
 
@@ -66,7 +66,7 @@ public class HomeActivity extends BaseActivity {
         private final List<Fragment> mFragmentList = new ArrayList<>();
         private final List<String> mFragmentTitleList = new ArrayList<>();
 
-        public ViewPagerAdapter(FragmentManager manager){
+        public ViewPagerAdapter(FragmentManager manager) {
             super(manager);
         }
 

@@ -1,5 +1,6 @@
 package com.example.kidusmt.movieapp.data.remote.movie;
 
+import com.example.kidusmt.movieapp.util.App;
 import com.example.kidusmt.movieapp.util.Constants;
 import com.example.kidusmt.movieapp.util.Utils;
 
@@ -9,6 +10,7 @@ import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
 import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -20,13 +22,13 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * Created by KidusMT on 12/28/2017.
  */
 
-public class MovieRemote implements MovieRemoteContract{
+public class MovieRemote implements MovieRemoteContract {
 
     public static MovieService movieService;
     private static Retrofit retrofit = null;
 
-    public MovieRemote(){
-        if(retrofit==null){
+    public MovieRemote() {
+        if (retrofit == null) {
             retrofit = new Retrofit.Builder()
                     .baseUrl(Constants.BASE_URL)
                     .addConverterFactory(GsonConverterFactory.create())
@@ -38,7 +40,10 @@ public class MovieRemote implements MovieRemoteContract{
     }
 
     private OkHttpClient createClient() {
+        HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
+        logging.setLevel(HttpLoggingInterceptor.Level.BODY);
         return new OkHttpClient.Builder()
+                .addInterceptor(logging)
                 .readTimeout(30, TimeUnit.SECONDS)
                 .writeTimeout(30, TimeUnit.SECONDS)
                 .build();
@@ -51,17 +56,17 @@ public class MovieRemote implements MovieRemoteContract{
                 .enqueue(new Callback<MoviesResponse>() {
                     @Override
                     public void onResponse(Call<MoviesResponse> call, Response<MoviesResponse> response) {
-                        if(response.isSuccessful()){
+                        if (response.isSuccessful()) {
                             final List<MovieDto> downloaded = response.body().getResults();
                             movies.addAll(downloaded);
-                        }else{
-
+                        } else {
+                            Utils.toast(App.getContext(), response.message());
                         }
                     }
 
                     @Override
                     public void onFailure(Call<MoviesResponse> call, Throwable t) {
-
+                        Utils.toast(App.getContext(), "check your internet connection and retry");
                     }
                 });
         return Observable.just(movies);

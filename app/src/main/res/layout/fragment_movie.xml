@@ -6,12 +6,14 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.example.kidusmt.movieapp.ui.home.MoviesFragment">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler_view_movie"
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/home_swipe_to_refresh"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:clipToPadding="false"
-        android:scrollbars="vertical"
-        tools:listitem="@layout/movie_card" />
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <include layout="@layout/content_movies"/>
+
+    </android.support.v4.widget.SwipeRefreshLayout>
 
 </RelativeLayout>

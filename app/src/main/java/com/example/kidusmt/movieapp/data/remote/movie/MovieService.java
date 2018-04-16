@@ -1,8 +1,5 @@
 package com.example.kidusmt.movieapp.data.remote.movie;
 
-import com.example.kidusmt.movieapp.data.remote.cast.CastResponse;
-import com.example.kidusmt.movieapp.data.remote.genre.GenreResponse;
-
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;

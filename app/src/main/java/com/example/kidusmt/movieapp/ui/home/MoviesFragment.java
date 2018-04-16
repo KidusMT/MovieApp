@@ -1,8 +1,10 @@
 package com.example.kidusmt.movieapp.ui.home;
 
+import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -10,7 +12,6 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import com.example.kidusmt.movieapp.R;
 import com.example.kidusmt.movieapp.base.view.BaseFragment;
@@ -18,13 +19,22 @@ import com.example.kidusmt.movieapp.data.RepoMovie;
 import com.example.kidusmt.movieapp.data.local.movie.Movie;
 import com.example.kidusmt.movieapp.data.local.movie.MovieLocal;
 import com.example.kidusmt.movieapp.data.remote.movie.MovieRemote;
+import com.example.kidusmt.movieapp.ui.detail.MovieDetailActivity;
 import com.example.kidusmt.movieapp.util.App;
+import com.example.kidusmt.movieapp.util.Utils;
+import com.pnikosis.materialishprogress.ProgressWheel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MoviesFragment extends BaseFragment implements HomeContract.View {
 
     private static final String ARG_CATEGORY = "CATEGORY";
+    SwipeRefreshLayout swipeRefreshLayout;
+    public ProgressWheel progressWheel;
+    List<Movie> movies;
+    RecyclerView recyclerView;
+    MovieAdapter adapter;
 
     public static MoviesFragment newInstance(String category) {
         MoviesFragment fragment = new MoviesFragment();
@@ -43,32 +53,39 @@ public class MoviesFragment extends BaseFragment implements HomeContract.View {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        presenter = new MoviesPresenter(
+        movies = new ArrayList<>();
+        presenter = new MoviesPresenter(new RepoMovie(
                 new MovieLocal(App.boxStore),
-                new MovieRemote());
+                new MovieRemote()));
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-//        View root = super.onCreateView(inflater, container, savedInstanceState);
+        View root = inflater.inflate(R.layout.fragment_movie, container, false);
+        progressWheel = root.findViewById(R.id.home_progress_wheel);
+        swipeRefreshLayout = root.findViewById(R.id.home_swipe_to_refresh);
+        Bundle args = getArguments();
+        if (args!=null){
+            category = args.getString(ARG_CATEGORY);
+            if (category == null) throw new NullPointerException("Category is null");
+        }
 
-        View root = inflater.inflate(R.layout.fragment_movie,container,false);
-
-//        Bundle args = getArguments();
-//        category = args.getString(ARG_CATEGORY);
-//        if (category == null) throw new NullPointerException("Category is null");
-
-        RecyclerView recyclerView = root.findViewById(R.id.recycler_view_movie);
+        recyclerView = root.findViewById(R.id.recycler_view_movie);
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getActivity(), 2);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.addItemDecoration(
                 new App.GridSpacingItemDecoration(2, dpToPx(10), true));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
-        MovieAdapter adapter = new MovieAdapter(presenter);
+        adapter = new MovieAdapter(movies, presenter);
         recyclerView.setAdapter(adapter);
+
+        swipeRefreshLayout.setOnRefreshListener(() -> {
+            presenter.loadMovies();
+            swipeRefreshLayout.setRefreshing(false);
+        });
 
         return root;
     }
@@ -83,21 +100,13 @@ public class MoviesFragment extends BaseFragment implements HomeContract.View {
 
     @Override
     public void attachPresenter(HomeContract.Presenter presenter) {
+        //TODO not necessary but I am not sure what happens in here
         this.presenter = presenter;
     }
 
     @Override
     public void showMovies(List<Movie> movieList) {
-
-    }
-
-    @Override
-    public void showProgress() {
-
-    }
-
-    @Override
-    public void hideProgress() {
+        adapter.update(movieList);
     }
 
     @Override
@@ -106,20 +115,17 @@ public class MoviesFragment extends BaseFragment implements HomeContract.View {
     }
 
     @Override
-    public void openMovieDetail(int position) {
-
-    }
-
-    @Override
-    public void refresh() {
-
+    public void openMovieDetail(Movie movie) {
+        //TODO there should be data passing in here. more than just opening activity
+        Intent intent = new Intent(getActivity(), MovieDetailActivity.class);
+//        intent.
+        startActivity(intent);
     }
 
     @Override
     public void onStart() {
         super.onStart();
         presenter.attachView(this);
-//        presenter.loadMovies();
     }
 
     @Override
@@ -137,5 +143,45 @@ public class MoviesFragment extends BaseFragment implements HomeContract.View {
     @Override
     public void close() {
         getActivity().finish();
+    }
+
+    @Override
+    public void showLoading(String message) {
+        progressWheel.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void showLoading() {
+        progressWheel.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideLoading() {
+        progressWheel.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void onUnknownError(String error) {
+        Utils.toast(getContext(), error);
+    }
+
+    @Override
+    public void onTimeout() {
+        Utils.toast(getContext(), "connection timeout");
+    }
+
+    @Override
+    public void onNetworkError() {
+        Utils.toast(getContext(), "network error");
+    }
+
+    @Override
+    public boolean isNetworkConnected() {
+        return false;
+    }
+
+    @Override
+    public void onConnectionError() {
+        Utils.toast(getContext(), "connection error");
     }
 }
