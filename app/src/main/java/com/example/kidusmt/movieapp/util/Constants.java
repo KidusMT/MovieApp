@@ -23,4 +23,9 @@ public final class Constants {
     public static final int STATE_COMPLETED = 2;
     public static final int STATE_ERROR = 2;
 
+    public static final String MOVIE_ID = "movie_id";
+    public static final String MOVIE_REVIEW = "movie_review";
+
+    public static final String IMAGE_SELECTED = "image_selected";
+
 }

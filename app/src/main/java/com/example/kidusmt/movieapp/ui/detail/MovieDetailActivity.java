@@ -14,33 +14,31 @@ import android.widget.TextView;
 
 import com.example.kidusmt.movieapp.R;
 import com.example.kidusmt.movieapp.base.view.BaseActivity;
-import com.example.kidusmt.movieapp.data.remote.cast.Cast;
-import com.example.kidusmt.movieapp.data.remote.cast.CastRemote;
-import com.example.kidusmt.movieapp.data.remote.cast.CastResponse;
-import com.example.kidusmt.movieapp.data.remote.movie.MovieRemote;
+import com.example.kidusmt.movieapp.data.model.Cast;
 import com.example.kidusmt.movieapp.ui.home.HomeActivity;
+import com.example.kidusmt.movieapp.ui.image.OpenImageActivity;
 import com.example.kidusmt.movieapp.util.Constants;
 import com.example.kidusmt.movieapp.util.RecyclerItemClickListener;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import static com.example.kidusmt.movieapp.util.Constants.IMAGE_SELECTED;
+import static com.example.kidusmt.movieapp.util.Constants.MOVIE_ID;
+import static com.example.kidusmt.movieapp.util.Constants.MOVIE_REVIEW;
 
 public class MovieDetailActivity extends BaseActivity implements MovieDetailContract.View {
 
     RecyclerView recyclerView;
     CastAdapter castAdapter;
-    Call<CastResponse> callDetail;
     List<Cast> castList;
     TextView reviewDetail;
     ImageView backdrop_img;
+    int movieId;
 
     MovieDetailContract.Presenter presenter;
 
-    public MovieDetailActivity(){}
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,23 +47,21 @@ public class MovieDetailActivity extends BaseActivity implements MovieDetailCont
 
         initCollapsingToolbar();
 
+        castList = new ArrayList<>();
+
         reviewDetail = findViewById(R.id.tv_review);
         backdrop_img = findViewById(R.id.backdrop);
 
-        int movieId = getIntent().getIntExtra("movie_id",0);
+        if (getIntent()!=null){
+            movieId = getIntent().getIntExtra(MOVIE_ID, 0);
 
-        reviewDetail.setText(getIntent().getStringExtra("movie_review"));
-        Picasso.with(this)
-                .load(getIntent().getStringExtra("movie_backdrop"))
-                .placeholder(R.color.colorAccent)
-                .into(backdrop_img);
-
-        //for just making sure our api key is available
-        if (Constants.API_KEY.isEmpty()) {
-            e("Please obtain your API KEY first from themoviedb.org");
-            return;
+            reviewDetail.setText(getIntent().getStringExtra(MOVIE_REVIEW));
+            Picasso.with(this)
+                    .load(getIntent().getStringExtra("movie_backdrop"))
+                    .placeholder(R.color.colorAccent)
+                    .into(backdrop_img);
         }
-
+        castAdapter = new CastAdapter(castList, presenter);
         recyclerView = findViewById(R.id.cast_recycler_view);
         LinearLayoutManager layoutManagerStart
                 = new LinearLayoutManager(getApplication(), LinearLayoutManager.HORIZONTAL, false);
@@ -75,22 +71,6 @@ public class MovieDetailActivity extends BaseActivity implements MovieDetailCont
         snapHelperStart.attachToRecyclerView(recyclerView);
 
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-
-
-        callDetail = CastRemote.service.getCastList(movieId, Constants.API_KEY);
-
-        callDetail.enqueue(new Callback<CastResponse>() {
-            @Override
-            public void onResponse(Call<CastResponse> call, Response<CastResponse> response) {
-                castList = response.body().getCast();
-
-            }
-
-            @Override
-            public void onFailure(Call<CastResponse> call, Throwable t) {
-                //TODO: display error message here, find a way for better display
-            }
-        });
 
         recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(this, recyclerView,
                 new RecyclerItemClickListener.OnItemClickListener() {
@@ -142,19 +122,15 @@ public class MovieDetailActivity extends BaseActivity implements MovieDetailCont
 
     @Override
     public void showDetail(List<Cast> castList) {
-        castAdapter = new CastAdapter(presenter);
-        recyclerView.setAdapter(castAdapter);
+        castAdapter.update(castList);
     }
 
     @Override
     public void openImage(String imageURI) {
         //TODO I have to implements the opening of an image when clicked
-    }
-
-    @Override
-    public void openHomeActivity() {
-        //TODO think about how to go back to the specific tab you where working to rather than opening HomeActivity by default
-        startActivity(new Intent(this, HomeActivity.class));
+        Intent intent = new Intent(this, OpenImageActivity.class);
+        intent.putExtra(IMAGE_SELECTED, imageURI);
+        startActivity(intent);
     }
 
     @Override

@@ -10,10 +10,9 @@ import android.widget.ImageView;
 
 import com.example.kidusmt.movieapp.R;
 import com.example.kidusmt.movieapp.base.view.BaseActivity;
-import com.example.kidusmt.movieapp.data.remote.genre.Genre;
-import com.example.kidusmt.movieapp.data.remote.genre.GenreRemote;
-import com.example.kidusmt.movieapp.data.remote.genre.GenreResponse;
-import com.example.kidusmt.movieapp.data.remote.movie.MovieRemote;
+import com.example.kidusmt.movieapp.data.model.Genre;
+import com.example.kidusmt.movieapp.data.repo.genre.remote.GenreRemote;
+import com.example.kidusmt.movieapp.data.repo.genre.remote.GenreResponse;
 import com.example.kidusmt.movieapp.ui.login.LoginActivity;
 import com.example.kidusmt.movieapp.util.Constants;
 import com.facebook.FacebookSdk;

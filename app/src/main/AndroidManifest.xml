@@ -45,7 +45,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.no_toolbar"/>
 
-        <activity android:name=".ui.openimg.OpenImageActivity"
+        <activity android:name=".ui.image.OpenImageActivity"
             android:theme="@style/AppTheme.no_toolbar"/>
 
         <meta-data android:name="com.facebook.sdk.ApplicationId"

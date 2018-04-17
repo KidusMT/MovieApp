@@ -1,7 +1,7 @@
 package com.example.kidusmt.movieapp.ui.home;
 
-import com.example.kidusmt.movieapp.data.RepoMovieContract;
-import com.example.kidusmt.movieapp.data.remote.movie.Movie;
+import com.example.kidusmt.movieapp.data.model.Movie;
+import com.example.kidusmt.movieapp.data.repo.movie.RepoMovieContract;
 import com.example.kidusmt.movieapp.util.ActivityState;
 
 import java.io.IOException;

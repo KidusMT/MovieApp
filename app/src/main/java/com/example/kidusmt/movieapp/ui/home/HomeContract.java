@@ -2,7 +2,7 @@ package com.example.kidusmt.movieapp.ui.home;
 
 import com.example.kidusmt.movieapp.base.mvp.BasePresenter;
 import com.example.kidusmt.movieapp.base.mvp.BaseView;
-import com.example.kidusmt.movieapp.data.remote.movie.Movie;
+import com.example.kidusmt.movieapp.data.model.Movie;
 
 import java.util.List;
 
