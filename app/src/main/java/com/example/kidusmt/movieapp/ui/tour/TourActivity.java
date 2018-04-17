@@ -34,7 +34,7 @@ public class TourActivity extends BaseActivity implements ViewPager.OnPageChange
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         pref = getSharedPreferences(APP_NAME, MODE_PRIVATE);
-        if (!isFirstTime()){//if not first time
+        if (notFirstTime()){//if not first time
             openLoginActivity();
         }
 
@@ -88,7 +88,7 @@ public class TourActivity extends BaseActivity implements ViewPager.OnPageChange
         }
     }
 
-    private boolean isFirstTime(){
+    private boolean notFirstTime(){
         return pref.getBoolean(KEY, false);
     }
 
