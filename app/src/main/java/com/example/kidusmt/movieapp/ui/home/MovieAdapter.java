@@ -37,7 +37,6 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieViewHolder> {
         holder.moviePoster.setOnClickListener(v -> presenter.onMovieClicked(movieList.get(holder.getAdapterPosition())));
     }
 
-    //for updating and putting the recyclerView on the fragments
     public void update(List<Movie> data) {
         movieList.clear();
         movieList.addAll(data);

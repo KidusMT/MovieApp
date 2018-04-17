@@ -49,14 +49,12 @@ public class CastRemote implements CastRemoteContract {
 
     /**
      * fetches the casts for the particular movie using the movie_id param and clientId param
-     * @param movie_id required
-     * @param clientId required
+     * @param movie_id (required)
+     * @param clientId (required)
      * @return Observable casts list for the observer
      */
     @Override
     public Observable<CastResponse> getCast(int movie_id, String clientId) {
         return service.getCastList(movie_id, clientId);
     }
-
-    //TODO has to  implement the parse method for parsing the json result and make it easy for use
 }

@@ -66,7 +66,6 @@ public class MoviesFragment extends BaseFragment implements HomeContract.View {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
         View root = inflater.inflate(R.layout.fragment_movie, container, false);
         progressWheel = root.findViewById(R.id.home_progress_wheel);
         swipeRefreshLayout = root.findViewById(R.id.home_swipe_to_refresh);
@@ -104,7 +103,6 @@ public class MoviesFragment extends BaseFragment implements HomeContract.View {
 
     @Override
     public void attachPresenter(HomeContract.Presenter presenter) {
-        //TODO not necessary but I am not sure what happens in here
         this.presenter = presenter;
     }
 
@@ -120,7 +118,6 @@ public class MoviesFragment extends BaseFragment implements HomeContract.View {
 
     @Override
     public void openMovieDetail(Movie movie) {
-        //TODO there should be data passing in here. more than just opening activity
         Intent intent = new Intent(getActivity(), MovieDetailActivity.class);
         intent.putExtra(MOVIE_ID, movie.id);
         intent.putExtra(MOVIE_REVIEW, movie.overview);

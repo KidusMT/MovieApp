@@ -79,7 +79,6 @@ public class MovieDetailActivity extends BaseActivity implements MovieDetailCont
 
         SnapHelper snapHelperStart = new StartSnapHelper();
         snapHelperStart.attachToRecyclerView(recyclerView);
-
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
         recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(this, recyclerView,
@@ -157,6 +156,7 @@ public class MovieDetailActivity extends BaseActivity implements MovieDetailCont
     public void onResume() {
         super.onResume();
         presenter.start();
+        presenter.attachView(this);
     }
 
     @Override
