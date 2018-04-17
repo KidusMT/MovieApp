@@ -15,15 +15,15 @@
         card_view:cardCornerRadius="@dimen/card_album_radius">
 
         <RelativeLayout
-            android:layout_width="150dp"
+            android:layout_width="140dp"
             android:layout_height="wrap_content">
 
             <ImageView
+                android:layout_margin="3dp"
                 android:id="@+id/iv_cast_thumbnail"
-                android:layout_width="wrap_content"
+                android:layout_width="130dp"
                 android:layout_height="150dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
-                android:clickable="true"
                 android:scaleType="fitXY"
                 app:srcCompact="@drawable/profile_placeholder"
                 android:transitionName="profile" />

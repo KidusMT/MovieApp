@@ -3,7 +3,15 @@ package com.example.kidusmt.movieapp.data.model;
 import com.example.kidusmt.movieapp.util.Constants;
 import com.google.gson.annotations.SerializedName;
 
+import io.objectbox.annotation.Entity;
+import io.objectbox.annotation.Id;
+import io.objectbox.annotation.Index;
+
+@Entity
 public class Cast {
+
+    @Id
+    public long _id;
 
     @SerializedName("cast_id")
     private Integer castId;
@@ -21,7 +29,7 @@ public class Cast {
     private Integer order;
     @SerializedName("profile_path")
     private String profilePath;
-
+    @Index
     public String movie_id;
 
     public Integer getCastId() {

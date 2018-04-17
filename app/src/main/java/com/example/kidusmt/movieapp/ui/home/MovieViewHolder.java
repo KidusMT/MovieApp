@@ -14,6 +14,8 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+import static com.example.kidusmt.movieapp.util.Constants.TMDB_IMAGE_PATH;
+
 /**
  * Created by KidusMT on 1/9/2018.
  */
@@ -40,10 +42,9 @@ public class MovieViewHolder extends RecyclerView.ViewHolder {
         movieGenre.setText(SplashActivity.getGenre(movie.genreIds));
         //THIS CAN GET TURNED ON WHEN WE HAVE THERE IS AN API TO CONSUME
         Picasso.with(moviePoster.getContext())
-                .load(movie.posterPath)
+                .load(TMDB_IMAGE_PATH+movie.posterPath)
                 .placeholder(R.color.colorAccent)
                 .into(moviePoster);
-//        Log.e("----->",movie.getPosterPath());
         moviePoster.setOnClickListener(
                 v -> moviePoster.getContext().startActivity(new Intent(moviePoster.getContext(),
                         MovieDetailActivity.class)

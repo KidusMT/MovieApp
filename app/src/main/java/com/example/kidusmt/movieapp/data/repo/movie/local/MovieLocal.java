@@ -1,7 +1,7 @@
 package com.example.kidusmt.movieapp.data.repo.movie.local;
 
 import com.example.kidusmt.movieapp.data.model.Movie;
-import com.example.kidusmt.movieapp.data.remote.movie.Movie_;
+import com.example.kidusmt.movieapp.data.model.Movie_;
 
 import java.util.List;
 

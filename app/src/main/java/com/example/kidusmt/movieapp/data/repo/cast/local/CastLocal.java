@@ -2,6 +2,7 @@ package com.example.kidusmt.movieapp.data.repo.cast.local;
 
 
 import com.example.kidusmt.movieapp.data.model.Cast;
+import com.example.kidusmt.movieapp.data.model.Cast_;
 
 import java.util.List;
 

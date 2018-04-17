@@ -15,16 +15,21 @@ import android.widget.TextView;
 import com.example.kidusmt.movieapp.R;
 import com.example.kidusmt.movieapp.base.view.BaseActivity;
 import com.example.kidusmt.movieapp.data.model.Cast;
-import com.example.kidusmt.movieapp.ui.home.HomeActivity;
+import com.example.kidusmt.movieapp.data.repo.cast.RepoCast;
+import com.example.kidusmt.movieapp.data.repo.cast.local.CastLocal;
+import com.example.kidusmt.movieapp.data.repo.cast.remote.CastRemote;
 import com.example.kidusmt.movieapp.ui.image.OpenImageActivity;
-import com.example.kidusmt.movieapp.util.Constants;
+import com.example.kidusmt.movieapp.util.App;
 import com.example.kidusmt.movieapp.util.RecyclerItemClickListener;
+import com.example.kidusmt.movieapp.util.Utils;
+import com.pnikosis.materialishprogress.ProgressWheel;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static com.example.kidusmt.movieapp.util.Constants.IMAGE_SELECTED;
+import static com.example.kidusmt.movieapp.util.Constants.MOVIE_BACKDROP;
 import static com.example.kidusmt.movieapp.util.Constants.MOVIE_ID;
 import static com.example.kidusmt.movieapp.util.Constants.MOVIE_REVIEW;
 
@@ -32,35 +37,40 @@ public class MovieDetailActivity extends BaseActivity implements MovieDetailCont
 
     RecyclerView recyclerView;
     CastAdapter castAdapter;
+    ProgressWheel progressWheel;
     List<Cast> castList;
     TextView reviewDetail;
     ImageView backdrop_img;
-    int movieId;
-
+    int movieId = 0;
     MovieDetailContract.Presenter presenter;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_detail);
 
-        initCollapsingToolbar();
-
         castList = new ArrayList<>();
 
-        reviewDetail = findViewById(R.id.tv_review);
-        backdrop_img = findViewById(R.id.backdrop);
-
-        if (getIntent()!=null){
+        if (getIntent() != null) {
             movieId = getIntent().getIntExtra(MOVIE_ID, 0);
 
             reviewDetail.setText(getIntent().getStringExtra(MOVIE_REVIEW));
             Picasso.with(this)
-                    .load(getIntent().getStringExtra("movie_backdrop"))
+                    .load(getIntent().getStringExtra(MOVIE_BACKDROP))
                     .placeholder(R.color.colorAccent)
                     .into(backdrop_img);
         }
+
+        presenter = new MovieDetailPresenter(new RepoCast(
+                new CastLocal(App.boxStore),
+                new CastRemote()), movieId);
+
+        initCollapsingToolbar();
+
+        progressWheel = findViewById(R.id.cast_progress_wheel);
+        reviewDetail = findViewById(R.id.tv_review);
+        backdrop_img = findViewById(R.id.backdrop);
+
         castAdapter = new CastAdapter(castList, presenter);
         recyclerView = findViewById(R.id.cast_recycler_view);
         LinearLayoutManager layoutManagerStart
@@ -127,7 +137,6 @@ public class MovieDetailActivity extends BaseActivity implements MovieDetailCont
 
     @Override
     public void openImage(String imageURI) {
-        //TODO I have to implements the opening of an image when clicked
         Intent intent = new Intent(this, OpenImageActivity.class);
         intent.putExtra(IMAGE_SELECTED, imageURI);
         startActivity(intent);
@@ -163,32 +172,32 @@ public class MovieDetailActivity extends BaseActivity implements MovieDetailCont
 
     @Override
     public void showLoading(String message) {
-
+        progressWheel.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void showLoading() {
-
+        progressWheel.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void hideLoading() {
-
+        progressWheel.setVisibility(View.GONE);
     }
 
     @Override
     public void onUnknownError(String error) {
-
+        Utils.toast(this, error);
     }
 
     @Override
     public void onTimeout() {
-
+        Utils.toast(this, "connection timeout");
     }
 
     @Override
     public void onNetworkError() {
-
+        Utils.toast(this, "network error");
     }
 
     @Override
@@ -198,6 +207,6 @@ public class MovieDetailActivity extends BaseActivity implements MovieDetailCont
 
     @Override
     public void onConnectionError() {
-
+        Utils.toast(this, "connection error");
     }
 }

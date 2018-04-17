@@ -2,14 +2,14 @@ package com.example.kidusmt.movieapp.util;
 
 public final class Constants {
     public static final String CATEGORY_POPULAR = "Popular",
-                    CATEGORY_TOP_RATED = "Top Rated",
-                    CATEGORY_UPCOMING = "Upcoming",
-                    CATEGORY_IN_THEATER = "In Theater";
+            CATEGORY_TOP_RATED = "Top Rated",
+            CATEGORY_UPCOMING = "Upcoming",
+            CATEGORY_IN_THEATER = "In Theater";
 
     public static final String FCATEGORY_POPULAR = "popular",
             FCATEGORY_TOP_RATED = "top_rated",
             FCATEGORY_UPCOMING = "upcoming",
-            FCATEGORY_IN_THEATER = "in_theater";
+            FCATEGORY_IN_THEATER = "now_playing";
 
     public final static String API_KEY = "a0757b4d3c350c0a8c4cbf0f561b7edd";
     public static final String TMDB_IMAGE_PATH = "http://image.tmdb.org/t/p/w500";
@@ -25,6 +25,7 @@ public final class Constants {
 
     public static final String MOVIE_ID = "movie_id";
     public static final String MOVIE_REVIEW = "movie_review";
+    public static final String MOVIE_BACKDROP = "movie_backdrop";
 
     public static final String IMAGE_SELECTED = "image_selected";
 

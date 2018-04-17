@@ -3,13 +3,13 @@ package com.example.kidusmt.movieapp.ui.detail;
 import com.example.kidusmt.movieapp.data.model.Cast;
 import com.example.kidusmt.movieapp.data.repo.cast.RepoCastContract;
 import com.example.kidusmt.movieapp.util.ActivityState;
+import com.example.kidusmt.movieapp.util.App;
+import com.example.kidusmt.movieapp.util.Utils;
 
 import java.io.IOException;
 import java.net.SocketTimeoutException;
-import java.util.ArrayList;
 import java.util.List;
 
-import io.objectbox.android.AndroidScheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
@@ -35,54 +35,58 @@ public class MovieDetailPresenter implements MovieDetailContract.Presenter {
 
     @Override
     public void loadDetail() {
-        repository.getCasts(movie_id)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new DisposableObserver<List<Cast>>() {
-                    @Override
-                    public void onNext(List<Cast> casts) {
-                        state.setStateCompleted();
+        if (movie_id != 0) {
+            repository.getCasts(movie_id)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new DisposableObserver<List<Cast>>() {
+                        @Override
+                        public void onNext(List<Cast> casts) {
+                            state.setStateCompleted();
 
-                        if (view == null) return;
-                        view.hideLoading();
-                        view.showDetail(casts);
+                            if (view == null) return;
+                            view.hideLoading();
+                            view.showDetail(casts);
 
-                        state.reset();
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        state.setStateError(e);
-
-                        if (view == null) return;
-                        view.showLoading();
-
-                        if (e instanceof SocketTimeoutException) {
-                            view.onTimeout();
-                        } else if (e instanceof IOException) {
-                            view.onNetworkError();
-                        } else if (e instanceof HttpException) {
-                            int code = ((HttpException) e).response().code();
-                            if (code >= 400 && code < 404) {
-                                view.onUnknownError("Unauthorized! Login again.");
-                            } else {
-                                ResponseBody responseBody = ((HttpException) e).response().errorBody();
-                                if (responseBody != null) {
-                                    view.onUnknownError(responseBody.toString());
-                                }
-                            }
-                        } else {
-                            view.onUnknownError(e.getMessage());
+                            state.reset();
                         }
-                        e.printStackTrace();
-                        view.hideLoading();
-                    }
 
-                    @Override
-                    public void onComplete() {
-                        view.hideLoading();
-                    }
-                });
+                        @Override
+                        public void onError(Throwable e) {
+                            state.setStateError(e);
+
+                            if (view == null) return;
+                            view.showLoading();
+
+                            if (e instanceof SocketTimeoutException) {
+                                view.onTimeout();
+                            } else if (e instanceof IOException) {
+                                view.onNetworkError();
+                            } else if (e instanceof HttpException) {
+                                int code = ((HttpException) e).response().code();
+                                if (code >= 400 && code < 404) {
+                                    view.onUnknownError("Unauthorized! Login again.");
+                                } else {
+                                    ResponseBody responseBody = ((HttpException) e).response().errorBody();
+                                    if (responseBody != null) {
+                                        view.onUnknownError(responseBody.toString());
+                                    }
+                                }
+                            } else {
+                                view.onUnknownError(e.getMessage());
+                            }
+                            e.printStackTrace();
+                            view.hideLoading();
+                        }
+
+                        @Override
+                        public void onComplete() {
+                            view.hideLoading();
+                        }
+                    });
+        }else{
+            Utils.toast(App.getContext(), "no image has been selected");
+        }
     }
 
     @Override

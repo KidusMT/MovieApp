@@ -15,7 +15,7 @@ import android.view.ViewGroup;
 
 import com.example.kidusmt.movieapp.R;
 import com.example.kidusmt.movieapp.base.view.BaseFragment;
-import com.example.kidusmt.movieapp.data.RepoMovie;
+import com.example.kidusmt.movieapp.data.repo.movie.RepoMovie;
 import com.example.kidusmt.movieapp.data.repo.movie.local.MovieLocal;
 import com.example.kidusmt.movieapp.data.model.Movie;
 import com.example.kidusmt.movieapp.data.repo.movie.remote.MovieRemote;
@@ -26,6 +26,10 @@ import com.pnikosis.materialishprogress.ProgressWheel;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.example.kidusmt.movieapp.util.Constants.MOVIE_BACKDROP;
+import static com.example.kidusmt.movieapp.util.Constants.MOVIE_ID;
+import static com.example.kidusmt.movieapp.util.Constants.MOVIE_REVIEW;
 
 public class MoviesFragment extends BaseFragment implements HomeContract.View {
 
@@ -118,7 +122,9 @@ public class MoviesFragment extends BaseFragment implements HomeContract.View {
     public void openMovieDetail(Movie movie) {
         //TODO there should be data passing in here. more than just opening activity
         Intent intent = new Intent(getActivity(), MovieDetailActivity.class);
-//        intent.
+        intent.putExtra(MOVIE_ID, movie.id);
+        intent.putExtra(MOVIE_REVIEW, movie.overview);
+        intent.putExtra(MOVIE_BACKDROP, movie.backdropPath);
         startActivity(intent);
     }
 
