@@ -49,4 +49,9 @@ public class GenreRemote implements GenreRemoteContract {
     public Observable<GenreResponse> getGenre(String clientId) {
         return genreService.getGenreList(Constants.API_KEY);
     }
+
+    @Override
+    public int size() {
+        return genreService.getGenreList(Constants.API_KEY).blockingSingle().getGenres().size();
+    }
 }

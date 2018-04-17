@@ -28,6 +28,8 @@ public interface GenreLocalContract {
      */
     Observable<List<Genre>> getGenre();
 
+    Observable<Boolean> removeAll();
+
 
     /**
      * Retrieves the amount of posts saved on the device.

@@ -12,9 +12,8 @@ import com.example.kidusmt.movieapp.base.view.BaseActivity;
 import com.example.kidusmt.movieapp.data.repo.genre.RepoGenre;
 import com.example.kidusmt.movieapp.data.repo.genre.local.GenreLocal;
 import com.example.kidusmt.movieapp.data.repo.genre.remote.GenreRemote;
-import com.example.kidusmt.movieapp.ui.login.LoginActivity;
 import com.example.kidusmt.movieapp.ui.tour.TourActivity;
-import com.example.kidusmt.movieapp.util.App;
+import com.example.kidusmt.movieapp.App;
 import com.facebook.FacebookSdk;
 
 import static com.example.kidusmt.movieapp.util.Constants.APP_NAME;
@@ -24,23 +23,16 @@ import static com.example.kidusmt.movieapp.util.Constants.KEY;
  * Created by KidusMT on 12/25/2017.
  */
 
-public class SplashActivity extends BaseActivity implements SplashContract.View {
+public class SplashActivity extends BaseActivity {
 
     public SharedPreferences pref;
     public SharedPreferences.Editor editor;
-    private SplashContract.Presenter presenter;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         FacebookSdk.sdkInitialize(this);
         setContentView(R.layout.activity_splash);
-
-        presenter = new SplashPresenter(new RepoGenre(
-                new GenreLocal(App.boxStore),
-                new GenreRemote()
-        ));
 
         pref = getSharedPreferences(APP_NAME, MODE_PRIVATE);
 
@@ -73,7 +65,7 @@ public class SplashActivity extends BaseActivity implements SplashContract.View 
 
     public void openTourActivity(){
         startActivity(new Intent(this, TourActivity.class));
-        close();
+        finish();
     }
 
     private void setSeen() {
@@ -82,64 +74,4 @@ public class SplashActivity extends BaseActivity implements SplashContract.View 
         editor.apply();
     }
 
-    @Override
-    protected void onPause() {
-        presenter.detachView();
-        super.onPause();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        presenter.start();
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        presenter.attachView(this);
-    }
-
-    @Override
-    public void attachPresenter(SplashContract.Presenter presenter) {
-        this.presenter = presenter;
-    }
-
-    @Override
-    public void close() {
-        finish();
-    }
-
-    @Override
-    public void showLoading(String message) {
-    }
-
-    @Override
-    public void showLoading() {
-    }
-
-    @Override
-    public void hideLoading() {
-    }
-
-    @Override
-    public void onUnknownError(String error) {
-    }
-
-    @Override
-    public void onTimeout() {
-    }
-
-    @Override
-    public void onNetworkError() {
-    }
-
-    @Override
-    public boolean isNetworkConnected() {
-        return false;
-    }
-
-    @Override
-    public void onConnectionError() {
-    }
 }

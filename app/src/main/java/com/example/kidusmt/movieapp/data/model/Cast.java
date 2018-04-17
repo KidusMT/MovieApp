@@ -30,7 +30,7 @@ public class Cast {
     @SerializedName("profile_path")
     private String profilePath;
     @Index
-    public String movie_id;
+    public int movie_id;
 
     public Integer getCastId() {
         return castId;

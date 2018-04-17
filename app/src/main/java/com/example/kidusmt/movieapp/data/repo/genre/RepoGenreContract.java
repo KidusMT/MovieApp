@@ -13,4 +13,6 @@ import io.reactivex.Observable;
 
 public interface RepoGenreContract {
     Observable<List<Genre>> getGenres();
+
+    int size();
 }

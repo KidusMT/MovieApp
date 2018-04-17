@@ -21,4 +21,6 @@ public interface GenreRemoteContract {
      * @return Observable value of the movie
      */
     Observable<GenreResponse> getGenre(String clientId);
+
+    int size();
 }

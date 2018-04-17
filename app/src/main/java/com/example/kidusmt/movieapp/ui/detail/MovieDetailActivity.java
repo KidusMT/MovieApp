@@ -19,7 +19,7 @@ import com.example.kidusmt.movieapp.data.repo.cast.RepoCast;
 import com.example.kidusmt.movieapp.data.repo.cast.local.CastLocal;
 import com.example.kidusmt.movieapp.data.repo.cast.remote.CastRemote;
 import com.example.kidusmt.movieapp.ui.image.OpenImageActivity;
-import com.example.kidusmt.movieapp.util.App;
+import com.example.kidusmt.movieapp.App;
 import com.example.kidusmt.movieapp.util.RecyclerItemClickListener;
 import com.example.kidusmt.movieapp.util.Utils;
 import com.pnikosis.materialishprogress.ProgressWheel;

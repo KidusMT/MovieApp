@@ -3,7 +3,7 @@ package com.example.kidusmt.movieapp.ui.detail;
 import com.example.kidusmt.movieapp.data.model.Cast;
 import com.example.kidusmt.movieapp.data.repo.cast.RepoCastContract;
 import com.example.kidusmt.movieapp.util.ActivityState;
-import com.example.kidusmt.movieapp.util.App;
+import com.example.kidusmt.movieapp.App;
 import com.example.kidusmt.movieapp.util.Utils;
 
 import java.io.IOException;

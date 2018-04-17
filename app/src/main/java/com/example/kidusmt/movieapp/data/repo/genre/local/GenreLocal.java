@@ -31,6 +31,12 @@ public class GenreLocal implements GenreLocalContract {
         return Observable.just(genres);
     }
 
+    @Override
+    public Observable<Boolean> removeAll() {
+        box.removeAll();
+        return Observable.just(true);
+    }
+
 
     @Override
     public int size() {

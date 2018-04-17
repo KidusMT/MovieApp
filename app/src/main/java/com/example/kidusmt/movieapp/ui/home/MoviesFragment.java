@@ -20,7 +20,7 @@ import com.example.kidusmt.movieapp.data.repo.movie.local.MovieLocal;
 import com.example.kidusmt.movieapp.data.model.Movie;
 import com.example.kidusmt.movieapp.data.repo.movie.remote.MovieRemote;
 import com.example.kidusmt.movieapp.ui.detail.MovieDetailActivity;
-import com.example.kidusmt.movieapp.util.App;
+import com.example.kidusmt.movieapp.App;
 import com.example.kidusmt.movieapp.util.Utils;
 import com.pnikosis.materialishprogress.ProgressWheel;
 
