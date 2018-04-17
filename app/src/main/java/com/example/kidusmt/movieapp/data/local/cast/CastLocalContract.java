@@ -1,6 +1,7 @@
 package com.example.kidusmt.movieapp.data.local.cast;
 
-import com.example.kidusmt.movieapp.data.local.movie.Movie;
+
+import com.example.kidusmt.movieapp.data.remote.movie.Movie;
 
 import java.util.List;
 

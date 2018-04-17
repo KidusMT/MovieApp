@@ -1,5 +1,8 @@
 package com.example.kidusmt.movieapp.data.local.movie;
 
+import com.example.kidusmt.movieapp.data.remote.movie.Movie;
+import com.example.kidusmt.movieapp.data.remote.movie.Movie_;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,28 +24,16 @@ public class MovieLocal implements MovieLocalContract {
 
     @Override
     public Observable<Boolean> putAll(List<Movie> movies) {
-        // TODO: Remove movies by category
         box.put(movies);
         return Observable.just(true);
     }
 
     @Override
     public Observable<List<Movie>> getByCategory(String category) {
-//        List<Movie> movies = box.find(Movie_.category, category);
-        List<Movie> movies = new ArrayList<>();
+        List<Movie> movies = box.find(Movie_.category, category);
         return Observable.just(movies);
     }
 
-    @Override
-    public Observable<Boolean> deleteAll(String category) {
-//        List<Movie> movies = box.find(Movie_.category, category);
-//        List<Movie> movies = new ArrayList<>();
-        Query<Movie> query = box.query()
-                .equal(Movie_.category, category)
-                .build();
-        query.remove();
-        return Observable.just(true);
-    }
 
     @Override
     public int size() {

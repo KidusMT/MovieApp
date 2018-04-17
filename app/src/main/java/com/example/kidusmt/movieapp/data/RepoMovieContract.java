@@ -14,7 +14,5 @@ public interface RepoMovieContract {
 
     Observable<List<Movie>> getMovies(String category);
 
-    Observable<Boolean> updateMovies(Movie movieDto);
-
     int size();
 }

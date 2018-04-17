@@ -7,7 +7,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.kidusmt.movieapp.R;
-import com.example.kidusmt.movieapp.data.local.movie.Movie;
+import com.example.kidusmt.movieapp.data.remote.movie.Movie;
 import com.example.kidusmt.movieapp.ui.detail.MovieDetailActivity;
 import com.example.kidusmt.movieapp.ui.splash.SplashActivity;
 import com.squareup.picasso.Picasso;

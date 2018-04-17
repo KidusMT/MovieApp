@@ -36,19 +36,18 @@ public class HomeActivity extends BaseActivity {
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-//        MoviesFragment[] movieTabs = {MoviesFragment.newInstance(Constants.CATEGORY_POPULAR),
-//                MoviesFragment.newInstance(Constants.CATEGORY_TOP_RATED),
-//                MoviesFragment.newInstance(Constants.CATEGORY_UPCOMING),
-//                MoviesFragment.newInstance(Constants.CATEGORY_IN_THEATER)};
+        MoviesFragment[] movieTabs = {
+                MoviesFragment.newInstance(Constants.FCATEGORY_POPULAR),
+                MoviesFragment.newInstance(Constants.FCATEGORY_TOP_RATED),
+                MoviesFragment.newInstance(Constants.FCATEGORY_UPCOMING),
+                MoviesFragment.newInstance(Constants.FCATEGORY_IN_THEATER)
+        };
 
-        adapter.addFragment(new MoviesFragment(), Constants.CATEGORY_POPULAR);
-        adapter.addFragment(new MoviesFragment(), Constants.CATEGORY_TOP_RATED);
-        adapter.addFragment(new MoviesFragment(), Constants.CATEGORY_UPCOMING);
-        adapter.addFragment(new MoviesFragment(), Constants.CATEGORY_IN_THEATER);
+        adapter.addFragment(movieTabs[0], Constants.CATEGORY_POPULAR);
+        adapter.addFragment(movieTabs[1], Constants.CATEGORY_TOP_RATED);
+        adapter.addFragment(movieTabs[2], Constants.CATEGORY_UPCOMING);
+        adapter.addFragment(movieTabs[3], Constants.CATEGORY_IN_THEATER);
 
-//        for(int i = 0; i< 4; i++){
-//            adapter.addFragment(movieTabs[i]);
-//        }
         viewPager.setAdapter(adapter);
     }
 

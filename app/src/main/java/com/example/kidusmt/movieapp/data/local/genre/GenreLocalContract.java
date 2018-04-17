@@ -1,6 +1,7 @@
 package com.example.kidusmt.movieapp.data.local.genre;
 
-import com.example.kidusmt.movieapp.data.local.movie.Movie;
+
+import com.example.kidusmt.movieapp.data.remote.movie.Movie;
 
 import java.util.List;
 
@@ -27,10 +28,6 @@ public interface GenreLocalContract {
      */
     Observable<List<Movie>> getByCategory(String category);
 
-    /**
-     * Deletes all the movies from storage
-     */
-    Observable<Boolean> deleteAll(String category);
 
     /**
      * Retrieves the amount of posts saved on the device.

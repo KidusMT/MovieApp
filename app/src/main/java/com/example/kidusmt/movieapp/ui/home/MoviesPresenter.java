@@ -1,14 +1,8 @@
 package com.example.kidusmt.movieapp.ui.home;
 
 import com.example.kidusmt.movieapp.data.RepoMovieContract;
-import com.example.kidusmt.movieapp.data.local.movie.Movie;
-import com.example.kidusmt.movieapp.data.local.movie.MovieLocalContract;
-import com.example.kidusmt.movieapp.data.remote.movie.MovieRemoteContract;
+import com.example.kidusmt.movieapp.data.remote.movie.Movie;
 import com.example.kidusmt.movieapp.util.ActivityState;
-import com.example.kidusmt.movieapp.util.Constants;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.IOException;
 import java.net.SocketTimeoutException;
@@ -92,13 +86,8 @@ public class MoviesPresenter implements HomeContract.Presenter {
                                 view.onUnknownError("Unauthorized! Login again.");
                             } else {
                                 ResponseBody responseBody = ((HttpException) e).response().errorBody();
-                                try {//should display the correct error message form the http protocol
-                                    if (responseBody != null) {
-                                        JSONObject jObjError = new JSONObject(responseBody.toString());
-                                        view.onUnknownError(jObjError.toString());
-                                    }
-                                } catch (JSONException e1) {
-                                    e1.printStackTrace();
+                                if (responseBody != null) {
+                                    view.onUnknownError(responseBody.toString());
                                 }
                             }
                         } else {

@@ -6,6 +6,11 @@ public final class Constants {
                     CATEGORY_UPCOMING = "Upcoming",
                     CATEGORY_IN_THEATER = "In Theater";
 
+    public static final String FCATEGORY_POPULAR = "popular",
+            FCATEGORY_TOP_RATED = "top_rated",
+            FCATEGORY_UPCOMING = "upcoming",
+            FCATEGORY_IN_THEATER = "in_theater";
+
     public final static String API_KEY = "a0757b4d3c350c0a8c4cbf0f561b7edd";
     public static final String TMDB_IMAGE_PATH = "http://image.tmdb.org/t/p/w500";
 

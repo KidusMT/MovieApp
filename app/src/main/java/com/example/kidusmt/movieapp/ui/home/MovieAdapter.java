@@ -6,7 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.kidusmt.movieapp.R;
-import com.example.kidusmt.movieapp.data.local.movie.Movie;
+import com.example.kidusmt.movieapp.data.remote.movie.Movie;
 
 import java.util.List;
 

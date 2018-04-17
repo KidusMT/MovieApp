@@ -1,23 +1,12 @@
 package com.example.kidusmt.movieapp.data.remote.movie;
 
-import com.example.kidusmt.movieapp.util.App;
 import com.example.kidusmt.movieapp.util.Constants;
-import com.example.kidusmt.movieapp.util.Utils;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import io.objectbox.android.AndroidScheduler;
 import io.reactivex.Observable;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.observers.DisposableObserver;
-import io.reactivex.schedulers.Schedulers;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -28,15 +17,15 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MovieRemote implements MovieRemoteContract {
 
-    public static MovieService movieService;
+    private static MovieService movieService;
     private static Retrofit retrofit = null;
 
     public MovieRemote() {
         if (retrofit == null) {
             retrofit = new Retrofit.Builder()
-                    .baseUrl(Constants.BASE_URL)
                     .addConverterFactory(GsonConverterFactory.create())
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                    .baseUrl(Constants.BASE_URL)
                     .client(createClient())
                     .build();
         }

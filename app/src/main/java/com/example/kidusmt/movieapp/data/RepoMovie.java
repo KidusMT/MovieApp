@@ -31,12 +31,6 @@ public class RepoMovie implements RepoMovieContract {
     }
 
     @Override
-    public Observable<Boolean> updateMovies(Movie movieDto) {
-        //TODO has to update the movies
-        return null;
-    }
-
-    @Override
     public int size() {
         return local.size();
     }
