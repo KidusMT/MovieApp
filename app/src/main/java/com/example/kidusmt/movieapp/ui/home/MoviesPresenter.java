@@ -83,7 +83,7 @@ public class MoviesPresenter implements HomeContract.Presenter {
                         } else if (e instanceof HttpException) {
                             int code = ((HttpException) e).response().code();
                             if (code >= 400 && code < 404) {
-                                view.onUnknownError("Unauthorized! Login again.");
+                                view.onUnknownError("Unauthorized access! Login again.");
                             } else {
                                 ResponseBody responseBody = ((HttpException) e).response().errorBody();
                                 if (responseBody != null) {
