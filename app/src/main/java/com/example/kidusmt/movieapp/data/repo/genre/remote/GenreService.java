@@ -1,5 +1,8 @@
 package com.example.kidusmt.movieapp.data.repo.genre.remote;
 
+import com.example.kidusmt.movieapp.data.model.GenreResponse;
+
+import io.reactivex.Observable;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
@@ -11,5 +14,5 @@ import retrofit2.http.Query;
 public interface GenreService {
 
     @GET("genre/movie/list")
-    Call<GenreResponse> getGenreList(@Query("api_key") String apiKey);
+    Observable<GenreResponse> getGenreList(@Query("api_key") String apiKey);
 }

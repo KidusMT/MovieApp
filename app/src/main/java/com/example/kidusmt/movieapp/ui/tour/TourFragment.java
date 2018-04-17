@@ -8,9 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.example.kidusmt.movieapp.base.view.BaseFragment;
 import com.example.kidusmt.movieapp.R;
-import com.example.kidusmt.movieapp.ui.home.HomeActivity;
+import com.example.kidusmt.movieapp.base.view.BaseFragment;
+import com.example.kidusmt.movieapp.ui.login.LoginActivity;
 import com.squareup.picasso.Picasso;
 
 /**
@@ -74,7 +74,7 @@ public class TourFragment extends BaseFragment {
 
         root.setOnClickListener(v -> {
             if (position != TourActivity.PAGE_COUNT - 1) return;
-            startActivity(new Intent(getActivity(), HomeActivity.class));
+            startActivity(new Intent(getActivity(), LoginActivity.class));
             getActivity().finish();
         });
 

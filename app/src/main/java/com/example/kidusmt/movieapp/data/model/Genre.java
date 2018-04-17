@@ -2,11 +2,17 @@ package com.example.kidusmt.movieapp.data.model;
 
 import com.google.gson.annotations.SerializedName;
 
+import io.objectbox.annotation.Entity;
+import io.objectbox.annotation.Id;
+
 /**
  * Created by KidusMT on 1/3/2018.
  */
-
+@Entity
 public class Genre {
+
+    @Id
+    public long _id;
 
     @SerializedName("id")
     private Integer id;

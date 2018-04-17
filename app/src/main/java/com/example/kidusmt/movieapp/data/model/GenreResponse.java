@@ -1,6 +1,5 @@
-package com.example.kidusmt.movieapp.data.repo.genre.remote;
+package com.example.kidusmt.movieapp.data.model;
 
-import com.example.kidusmt.movieapp.data.model.Genre;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;

@@ -32,6 +32,7 @@ import static com.example.kidusmt.movieapp.util.Constants.IMAGE_SELECTED;
 import static com.example.kidusmt.movieapp.util.Constants.MOVIE_BACKDROP;
 import static com.example.kidusmt.movieapp.util.Constants.MOVIE_ID;
 import static com.example.kidusmt.movieapp.util.Constants.MOVIE_REVIEW;
+import static com.example.kidusmt.movieapp.util.Constants.TMDB_IMAGE_PATH;
 
 public class MovieDetailActivity extends BaseActivity implements MovieDetailContract.View {
 
@@ -48,15 +49,20 @@ public class MovieDetailActivity extends BaseActivity implements MovieDetailCont
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_detail);
-
         castList = new ArrayList<>();
+
+        initCollapsingToolbar();
+
+        progressWheel = findViewById(R.id.cast_progress_wheel);
+        reviewDetail = findViewById(R.id.tv_review);
+        backdrop_img = findViewById(R.id.backdrop);
 
         if (getIntent() != null) {
             movieId = getIntent().getIntExtra(MOVIE_ID, 0);
-
             reviewDetail.setText(getIntent().getStringExtra(MOVIE_REVIEW));
             Picasso.with(this)
-                    .load(getIntent().getStringExtra(MOVIE_BACKDROP))
+                    .load(getIntent()
+                            .getStringExtra(TMDB_IMAGE_PATH+MOVIE_BACKDROP))
                     .placeholder(R.color.colorAccent)
                     .into(backdrop_img);
         }
@@ -64,12 +70,6 @@ public class MovieDetailActivity extends BaseActivity implements MovieDetailCont
         presenter = new MovieDetailPresenter(new RepoCast(
                 new CastLocal(App.boxStore),
                 new CastRemote()), movieId);
-
-        initCollapsingToolbar();
-
-        progressWheel = findViewById(R.id.cast_progress_wheel);
-        reviewDetail = findViewById(R.id.tv_review);
-        backdrop_img = findViewById(R.id.backdrop);
 
         castAdapter = new CastAdapter(castList, presenter);
         recyclerView = findViewById(R.id.cast_recycler_view);

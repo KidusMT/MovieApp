@@ -1,6 +1,7 @@
 package com.example.kidusmt.movieapp.data.repo.genre.local;
 
 
+import com.example.kidusmt.movieapp.data.model.Genre;
 import com.example.kidusmt.movieapp.data.model.Movie;
 
 import java.util.List;
@@ -19,14 +20,13 @@ public interface GenreLocalContract {
      * @param movies movies to save
      * @return Observable boolean, true if it was saved, false otherwise
      */
-    Observable<Boolean> putAll(List<Movie> movies);
+    Observable<Boolean> putAll(List<Genre> movies);
 
     /**
      * Retrieve a list of movies by the given category
-     * @param category The category to search for
      * @return Observable list of movies retrieved
      */
-    Observable<List<Movie>> getByCategory(String category);
+    Observable<List<Genre>> getGenre();
 
 
     /**

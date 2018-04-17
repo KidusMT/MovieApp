@@ -1,6 +1,11 @@
 package com.example.kidusmt.movieapp.util;
 
 public final class Constants {
+
+    public static final String APP_NAME = "MovieApp";
+
+    public static final String KEY = "SEEN";
+
     public static final String CATEGORY_POPULAR = "Popular",
             CATEGORY_TOP_RATED = "Top Rated",
             CATEGORY_UPCOMING = "Upcoming",

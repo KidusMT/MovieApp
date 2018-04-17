@@ -2,6 +2,7 @@ package com.example.kidusmt.movieapp.data.repo.genre.remote;
 
 
 import com.example.kidusmt.movieapp.data.model.Genre;
+import com.example.kidusmt.movieapp.data.model.GenreResponse;
 
 import java.util.List;
 
@@ -19,5 +20,5 @@ public interface GenreRemoteContract {
      * @param clientId for the movie API
      * @return Observable value of the movie
      */
-    Observable<List<Genre>> getGenre(String clientId);
+    Observable<GenreResponse> getGenre(String clientId);
 }

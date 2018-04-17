@@ -1,6 +1,7 @@
 package com.example.kidusmt.movieapp.data.repo.genre.remote;
 
 import com.example.kidusmt.movieapp.data.model.Genre;
+import com.example.kidusmt.movieapp.data.model.GenreResponse;
 import com.example.kidusmt.movieapp.util.Constants;
 
 import java.util.ArrayList;
@@ -45,21 +46,7 @@ public class GenreRemote implements GenreRemoteContract {
     }
 
     @Override
-    public Observable<List<Genre>> getGenre(String clientId) {
-        final List<Genre> genres = new ArrayList<>();
-        genreService.getGenreList(Constants.API_KEY)
-                .enqueue(new Callback<GenreResponse>() {
-                    @Override
-                    public void onResponse(Call<GenreResponse> call, Response<GenreResponse> response) {
-                        final List<Genre> download = response.body().getGenres();
-                        genres.addAll(download);
-                    }
-
-                    @Override
-                    public void onFailure(Call<GenreResponse> call, Throwable t) {
-                        //TODO has to display error
-                    }
-                });
-        return Observable.just(genres);
+    public Observable<GenreResponse> getGenre(String clientId) {
+        return genreService.getGenreList(Constants.API_KEY);
     }
 }

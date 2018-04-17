@@ -6,6 +6,7 @@ import android.widget.ImageView;
 
 import com.example.kidusmt.movieapp.R;
 import com.example.kidusmt.movieapp.base.view.BaseActivity;
+import com.example.kidusmt.movieapp.util.Constants;
 
 /**
  * Created by KidusMT on 1/3/2018.
@@ -23,7 +24,7 @@ public class OpenImageActivity extends BaseActivity {
         img_full = findViewById(R.id.iv_open_img);
 
         if (getIntent() != null) {
-            Uri uri = new Uri.Builder().path(getIntent().getStringExtra("img_full")).build();
+            Uri uri = new Uri.Builder().path(Constants.TMDB_IMAGE_PATH+getIntent().getStringExtra("img_full")).build();
             img_full.setImageURI(uri);
         }
     }

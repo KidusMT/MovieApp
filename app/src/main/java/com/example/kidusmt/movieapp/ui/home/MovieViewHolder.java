@@ -10,6 +10,7 @@ import com.example.kidusmt.movieapp.R;
 import com.example.kidusmt.movieapp.data.model.Movie;
 import com.example.kidusmt.movieapp.ui.detail.MovieDetailActivity;
 import com.example.kidusmt.movieapp.ui.splash.SplashActivity;
+import com.example.kidusmt.movieapp.ui.splash.SplashPresenter;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -39,7 +40,7 @@ public class MovieViewHolder extends RecyclerView.ViewHolder {
         movieTitle.setText(movie.title);
         //TODO check is the String.format() method is correct
         movieRating.setText(String.format("%s", movie.voteAverage));
-        movieGenre.setText(SplashActivity.getGenre(movie.genreIds));
+        movieGenre.setText(SplashPresenter.getGenre(movie.genreIds));
         //THIS CAN GET TURNED ON WHEN WE HAVE THERE IS AN API TO CONSUME
         Picasso.with(moviePoster.getContext())
                 .load(TMDB_IMAGE_PATH+movie.posterPath)

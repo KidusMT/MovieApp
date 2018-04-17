@@ -108,9 +108,29 @@
         }
       ],
       "relations": []
+    },
+    {
+      "id": "4:5974701634528113221",
+      "lastPropertyId": "3:4075006207863998685",
+      "name": "Genre",
+      "properties": [
+        {
+          "id": "1:7955051277436328821",
+          "name": "id"
+        },
+        {
+          "id": "2:8162872805913168865",
+          "name": "name"
+        },
+        {
+          "id": "3:4075006207863998685",
+          "name": "_id"
+        }
+      ],
+      "relations": []
     }
   ],
-  "lastEntityId": "3:294300419976597148",
+  "lastEntityId": "4:5974701634528113221",
   "lastIndexId": "4:5002939701980496906",
   "lastRelationId": "0:0",
   "lastSequenceId": "0:0",

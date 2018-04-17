@@ -1,5 +1,7 @@
 package com.example.kidusmt.movieapp.ui.tour;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
@@ -9,6 +11,10 @@ import android.widget.TextView;
 
 import com.example.kidusmt.movieapp.R;
 import com.example.kidusmt.movieapp.base.view.BaseActivity;
+import com.example.kidusmt.movieapp.ui.login.LoginActivity;
+
+import static com.example.kidusmt.movieapp.util.Constants.APP_NAME;
+import static com.example.kidusmt.movieapp.util.Constants.KEY;
 
 /**
  * Tour activity for showing the person what the app is about
@@ -22,10 +28,16 @@ public class TourActivity extends BaseActivity implements ViewPager.OnPageChange
     private TextView tourInfoLabel;
 
     private LinearLayout pagerIndicatorContainer;
+    private SharedPreferences pref;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        pref = getSharedPreferences(APP_NAME, MODE_PRIVATE);
+        if (!isFirstTime()){//if not first time
+            openLoginActivity();
+        }
+
         setContentView(R.layout.activity_tour);
 
         // Retrieve the ViewPager and the tour info label
@@ -74,6 +86,15 @@ public class TourActivity extends BaseActivity implements ViewPager.OnPageChange
             int background = position == i ? R.drawable.pager_indicator_selected : R.drawable.pager_indicator_normal;
             indicator.setBackgroundResource(background);
         }
+    }
+
+    private boolean isFirstTime(){
+        return pref.getBoolean(KEY, false);
+    }
+
+    public void openLoginActivity(){
+        startActivity(new Intent(this, LoginActivity.class));
+        finish();
     }
 
     @Override
