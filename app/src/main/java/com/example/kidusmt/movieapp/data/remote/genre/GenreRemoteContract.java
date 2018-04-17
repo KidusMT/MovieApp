@@ -1,8 +1,6 @@
 package com.example.kidusmt.movieapp.data.remote.genre;
 
 
-import com.example.kidusmt.movieapp.data.remote.movie.MovieDto;
-
 import java.util.List;
 
 import io.reactivex.Observable;

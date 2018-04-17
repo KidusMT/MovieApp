@@ -8,7 +8,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import io.objectbox.android.AndroidScheduler;
 import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.observers.DisposableObserver;
+import io.reactivex.schedulers.Schedulers;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
@@ -50,25 +54,7 @@ public class MovieRemote implements MovieRemoteContract {
     }
 
     @Override
-    public Observable<List<MovieDto>> getMovies(String clientId, String category) {
-        final List<MovieDto> movies = new ArrayList<>();
-        movieService.getMovies(Constants.API_KEY, category)
-                .enqueue(new Callback<MoviesResponse>() {
-                    @Override
-                    public void onResponse(Call<MoviesResponse> call, Response<MoviesResponse> response) {
-                        if (response.isSuccessful()) {
-                            final List<MovieDto> downloaded = response.body().getResults();
-                            movies.addAll(downloaded);
-                        } else {
-                            Utils.toast(App.getContext(), response.message());
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<MoviesResponse> call, Throwable t) {
-                        Utils.toast(App.getContext(), "check your internet connection and retry");
-                    }
-                });
-        return Observable.just(movies);
+    public Observable<MoviesResponse> getMovies(String clientId, String category) {
+        return movieService.getMovies(category, clientId);
     }
 }

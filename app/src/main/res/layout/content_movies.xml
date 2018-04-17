@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/material_grey_600"
     tools:showIn="@layout/fragment_movie">
 
     <android.support.v7.widget.RecyclerView

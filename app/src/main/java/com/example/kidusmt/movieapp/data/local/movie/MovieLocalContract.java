@@ -1,5 +1,7 @@
 package com.example.kidusmt.movieapp.data.local.movie;
 
+import com.example.kidusmt.movieapp.data.remote.movie.Movie;
+
 import java.util.List;
 
 import io.reactivex.Observable;

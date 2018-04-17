@@ -1,8 +1,5 @@
 package com.example.kidusmt.movieapp.data.remote.cast;
 
-import com.example.kidusmt.movieapp.data.local.movie.Movie;
-import com.example.kidusmt.movieapp.data.remote.movie.MovieDto;
-import com.example.kidusmt.movieapp.data.remote.movie.MoviesResponse;
 import com.example.kidusmt.movieapp.util.Constants;
 
 import java.util.ArrayList;

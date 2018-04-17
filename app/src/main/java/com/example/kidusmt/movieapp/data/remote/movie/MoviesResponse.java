@@ -1,6 +1,5 @@
 package com.example.kidusmt.movieapp.data.remote.movie;
 
-import com.example.kidusmt.movieapp.data.remote.movie.MovieDto;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
@@ -15,7 +14,7 @@ public class MoviesResponse {
     private int page;
 
     @SerializedName("results")
-    private List<MovieDto> results;
+    private List<Movie> results;
 
     @SerializedName("total_results")
     private int totalResults;
@@ -31,11 +30,11 @@ public class MoviesResponse {
         this.page = page;
     }
 
-    public List<MovieDto> getResults() {
+    public List<Movie> getResults() {
         return results;
     }
 
-    public void setResults(List<MovieDto> results) {
+    public void setResults(List<Movie> results) {
         this.results = results;
     }
 

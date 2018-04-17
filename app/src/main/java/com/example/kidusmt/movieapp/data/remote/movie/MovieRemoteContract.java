@@ -18,5 +18,5 @@ public interface MovieRemoteContract {
      * @param category for different categories of the movie
      * @return Observable value of the movie
      */
-    Observable<List<MovieDto>> getMovies(String clientId, String category);
+    Observable<MoviesResponse> getMovies(String clientId, String category);
 }
