@@ -10,14 +10,16 @@ public class LoginPresenter implements LoginContract.Presenter {
 
     private ActivityState state;
     private LoginContract.View view;
-    public LoginPresenter(){
+
+    public LoginPresenter() {
         state = ActivityState.getInstance();
     }
 
     @Override
     public void start() {
         if (state.loading()) return;
-        view.hideLoading();
+        if (view != null)
+            view.hideLoading();
     }
 
     @Override

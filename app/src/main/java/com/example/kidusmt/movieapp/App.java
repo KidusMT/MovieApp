@@ -1,5 +1,6 @@
 package com.example.kidusmt.movieapp;
 
+import android.annotation.SuppressLint;
 import android.app.Application;
 import android.content.Context;
 import android.graphics.Rect;
@@ -13,6 +14,7 @@ import com.example.kidusmt.movieapp.data.repo.genre.RepoGenre;
 import com.example.kidusmt.movieapp.data.repo.genre.local.GenreLocal;
 import com.example.kidusmt.movieapp.data.repo.genre.remote.GenreRemote;
 
+import java.net.HttpURLConnection;
 import java.util.HashMap;
 import java.util.List;
 
@@ -30,6 +32,7 @@ import retrofit2.HttpException;
 public class App extends Application {
 
     public static BoxStore boxStore;
+    @SuppressLint("StaticFieldLeak")
     public static Context context;
     public static HashMap<Integer, String> genreIds = new HashMap();
     RepoGenre repository;
@@ -56,11 +59,13 @@ public class App extends Application {
 
                     @Override
                     public void onError(Throwable e) {
-                        ResponseBody responseBody = ((HttpException) e).response().errorBody();
-                        if (responseBody != null) {
-                            Toast.makeText(App.this, repository.toString(), Toast.LENGTH_SHORT).show();
-                        }
-                        e.printStackTrace();
+//                        if (((HttpException) e).code() == HttpURLConnection.HTTP_BAD_REQUEST) {
+//                            ResponseBody responseBody = ((HttpException) e).response().errorBody();
+//                            if (responseBody != null) {
+//                                Toast.makeText(App.this, responseBody.toString(), Toast.LENGTH_SHORT).show();
+//                            }
+                            e.printStackTrace();
+//                        }
                     }
 
                     @Override
