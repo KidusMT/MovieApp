@@ -16,4 +16,8 @@ Sample login implementation with email and also using Facebook's authentication
 Shows the Casts (Credits) of the movie
 
 ## HomeActivity
-The Home screen there are 4 tabs showing : Popular, Top, Upcoming and In Theater Movies.
+The Home screen there are 4 tabs showing : 
+- Popular, 
+- Top, 
+- Upcoming and 
+- In Theater Movies.
