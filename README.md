@@ -1,0 +1,2 @@
+# MovieApp
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/3665c30cb6ea41cbb8ceca8618ef5633)](https://app.codacy.com/app/KidusMT/MovieApp?utm_source=github.com&utm_medium=referral&utm_content=KidusMT/MovieApp&utm_campaign=Badge_Grade_Dashboard)
