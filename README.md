@@ -22,3 +22,5 @@ The Home screen there are 4 tabs showing :
 - Top, 
 - Upcoming and 
 - In Theater Movies.
+
+![image](https://user-images.githubusercontent.com/18373774/115493403-4fbbd200-a229-11eb-8f8f-7d073f9a9233.png)
