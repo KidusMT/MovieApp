@@ -1,7 +1,8 @@
 # MovieApp
 MovieApp is an android app that consumes TheMovieDB API which is from https://api.themoviedb.org/.
 
-![Alt text](https://pbs.twimg.com/profile_images/789117657714831361/zGfknUu8.jpg "The Movie DataBase")
+![The Movie DataBase](https://user-images.githubusercontent.com/18373774/115493341-2c912280-a229-11eb-8aaa-a703f30118f8.png)
+
 
 
 # Contents
